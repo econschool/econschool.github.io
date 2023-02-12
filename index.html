@@ -1,223 +1,221 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Educational Institute</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
-  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <style type="text/css">
-    /* Custom Styles */
+  <style>
+    /* Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* Body */
     body {
-      font-family: 'Montserrat', sans-serif;
-      background-color: #f2f2f2;
+      background-color: #f5f5f5;
+      font-family: Arial, sans-serif;
     }
-    .header {
-      background-color: #fff;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-      height: 80px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+
+    /* Header */
+    header {
+      background-color: #333;
+      color: #fff;
+      padding: 20px;
+      text-align: center;
     }
-    .header h1 {
-      font-weight: 700;
+
+    header h1 {
       margin: 0;
     }
-    .intro {
-      background-image: url('./bg.jpg');
-      background-size: cover;
-      background-position: center;
-      height: 500px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+
+    /* About */
+    .about {
+      background-color: #fff;
+      padding: 40px;
       text-align: center;
     }
-    .intro h2 {
-      font-weight: 700;
-      color: #fff;
-      margin-bottom: 40px;
+
+    .about h2 {
+      margin-bottom: 20px;
     }
-    .intro p {
+
+    .about p {
+      color: #333;
       font-size: 18px;
-      color: #fff;
-      margin-bottom: 40px;
+      margin-bottom: 20px;
     }
+
+    /* Courses */
     .courses {
-      padding: 80px 0;
+      background-color: #333;
+      color: #fff;
+      padding: 40px;
+    }
+
+    .courses h2 {
+      margin-bottom: 20px;
       text-align: center;
     }
-    .courses h2 {
-      font-weight: 700;
-      margin-bottom: 40px;
-    }
+
     .course {
       background-color: #fff;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-      height: 200px;
-      width: 300px;
-      display: inline-block;
-      margin: 20px;
+      margin-bottom: 20px;
+      padding: 20px;
       text-align: center;
-      padding: 40px;
+      width: 30%;
+      float: left;
+      margin-right: 20px;
     }
-    .course h3 {
-      font-weight: 700;
-      margin-bottom: 20px;
-    }
-    .course p {
-      font-size: 14px;
-      color: #999;
-      margin-bottom: 20px;
-    }
+
+    /* Teachers */
     .teachers {
-      background-color: #f2f2f2;
-      padding: 80px 0;
-      text-align: center;
-    }
-    .teachers h2 {
-      font-weight: 700;
-      margin-bottom: 40px;
-    }
-    .teacher {
       background-color: #fff;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-      height: 200px;
-      width: 300px;
-      display: inline-block;
-      margin: 20px;
-      text-align: center;
       padding: 40px;
-    }
-    .teacher h3 {
-      font-weight: 700;
-      margin-bottom: 20px;
-    }
-    .teacher p {
-      font-size: 14px;
-      color: #999;
-      margin-bottom: 20px;
-    }
-    .contact {
-      padding: 80px 0;
-      background-color: #fff;
-    }
-    .contact h2 {
-      font-weight: 700;
-      margin-bottom: 40px;
       text-align: center;
     }
-    .form {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-    }
-    .form input[type="text"],
-    .form input[type="email"],
-    .form textarea {
-      width: 100%;
-      padding: 20px;
+
+    .teachers h2 {
       margin-bottom: 20px;
-      background-color: #f2f2f2;
-      border: none;
-      font-size: 14px;
-      color: #999;
     }
-    .form input[type="submit"] {
+
+    .teacher {
+      background-color: #f5f5f5;
+      border-radius: 50%;
+      display: inline-block;
+      height: 200px;
+      margin: 20px;
+      overflow: hidden;
+      text-align: center;
+      width: 200px;
+    }
+
+    .teacher img {
+      height: 100%;
+      width: 100%;
+    }
+
+    .teacher h3 {
+      margin-top: 20px;
+    }
+
+    .teacher p {
+      color: #333;
+      font-size: 18px;
+      margin-bottom: 20px;
+    }
+
+    /* Contact */
+    .contact {
       background-color: #333;
       color: #fff;
-      padding: 20px;
-      border: none;
-      font-size: 16px;
-      font-weight: 700;
-      cursor: pointer;
+      padding: 40px;
+      text-align: center;
     }
-    .form input[type="submit"]:hover {
-      background-color: #555;
+
+    .contact h2 {
+      margin-bottom: 20px;
     }
-    .footer {
-      background-color: #333;
-      color: #fff;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 80px;
+
+    .form {
+      text-align: left;
+      width: 50%;
+      margin: 0 auto;
     }
-    .footer p {
-      margin: 0;
-    }
-  </style>
+    .form label {
+  color: #333;
+  display: block;
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.form input, .form textarea {
+  background-color: #f5f5f5;
+  border: none;
+  border-radius: 5px;
+  color: #333;
+  font-size: 18px;
+  padding: 10px;
+  width: 100%;
+}
+
+.form input[type="submit"] {
+  background-color: #333;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 18px;
+  padding: 10px 20px;
+  width: 100%;
+}
+
+/* Footer */
+footer {
+  background-color: #333;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+}
+</style>
 </head>
 <body>
-  <!-- Header -->
-  <header class="header">
-    <h1>Educational Institute</h1>
-  </header>
-  <!-- Intro -->
-  <section class="intro">
-    <div class="container">
-      <h2>Welcome to our Institute</h2>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
-    </div>
+<header>
+<h1>Educational Institute</h1>
+</header>
+<section class="about">
+<h2>About Us</h2>
+<p>We are a leading educational institute, offering a wide range of courses to students of all ages. Our experienced teachers are dedicated to providing high-quality education and helping our students reach their full potential.</p>
+</section>
+<section class="courses">
+<h2>Courses</h2>
+<div class="course">
+  <h3>Math</h3>
+  <p>Learn fundamental math concepts and problem solving skills.</p>
+</div>
+<div class="course">
+  <h3>Science</h3>
+  <p>Explore the wonders of biology, chemistry, and physics.</p>
+</div>
+<div class="course">
+  <h3>English</h3>
+  <p>Improve your reading, writing, and communication skills.</p>
+</div>
+</section>
+<section class="teachers">
+<h2>Meet Our Teachers</h2>
+<div class="teacher">
+  <img src="teacher1.jpg" alt="Teacher 1">
+  <h3>John Doe</h3>
+  <p>Experienced Math teacher with a passion for helping students succeed.</p>
+</div>
+<div class="teacher">
+  <img src="teacher2.jpg" alt="Teacher 2">
+  <h3>Jane Doe</h3>
+  <p>Dedicated Science teacher with a love for hands-on learning.</p>
+</div>
+<div class="teacher">
+  <img src="teacher3.jpg" alt="Teacher 3">
+  <h3>Jim Doe</h3>
+  <p>Enthusiastic English teacher with a talent for engaging students.</p>
+</div>
+</section>
+<section class="contact">
+<h2>Contact Us</h2>
+<form class="form">
+  <label for="name">Name</label>
+  <input type="text" id="name" name="name" required>
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" required>
+      <label for="message">Message</label>
+      <textarea id="message" name="message" required></textarea>
+      <input type="submit" value="Submit">
+    </form>
   </section>
-  <!-- Courses -->
-  <section class="courses">
-    <div class="container">
-      <h2>Our Courses</h2>
-      <div class="course">
-        <h3>Course 1</h3>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
-      </div>
-      <div
-      <div class="course">
-        <h3>Course 2</h3>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
-      </div>
-      <div class="course">
-        <h3>Course 3</h3>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
-      </div>
-    </div>
-  </section>
-  <!-- Teachers -->
-  <section class="teachers">
-    <div class="container">
-      <h2>Our Teachers</h2>
-      <div class="teacher">
-        <img src="teacher1.jpg" alt="Teacher 1">
-        <h3>Teacher 1</h3>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
-      </div>
-      <div class="teacher">
-        <img src="teacher2.jpg" alt="Teacher 2">
-        <h3>Teacher 2</h3>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
-      </div>
-      <div class="teacher">
-        <img src="teacher3.jpg" alt="Teacher 3">
-        <h3>Teacher 3</h3>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
-      </div>
-    </div>
-  </section>
-  <!-- Contact -->
-  <section class="contact">
-    <div class="container">
-      <h2>Contact Us</h2>
-      <form class="form">
-        <input type="text" placeholder="Name">
-        <input type="email" placeholder="Email">
-        <textarea placeholder="Message"></textarea>
-        <input type="submit" value="Submit">
-      </form>
-    </div>
-  </section>
-  <!-- Footer -->
-  <footer class="footer">
-    <p>Copyright &copy; 2022 Educational Institute</p>
+  <footer>
+    <p>&copy; Educational Institute 2023</p>
   </footer>
 </body>
 </html>
