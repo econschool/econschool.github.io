@@ -1,65 +1,102 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Educational Institute</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <style type="text/css">
-    /* Add custom styles here */
-  </style>
-</head>
-<body>
-  <!-- Header Section -->
-  <header>
-    <nav class="navbar navbar-default">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <a class="navbar-brand" href="#">Educational Institute</a>
-        </div>
-        <ul class="nav navbar-nav navbar-right">
-          <li><a href="#about">About</a></li>
-          <li><a href="#courses">Courses</a></li>
-          <li><a href="#teachers">Teachers</a></li>
-          <li><a href="#contact">Contact</a></li>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script>
+    <script src="https://kit.fontawesome.com/fa0d550621.js" crossorigin="anonymous"></script>
+    <script src="script.js"></script>
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-NX2T0MVJLL"></script>
+	<script>
+  	window.dataLayer = window.dataLayer || [];
+  	function gtag(){dataLayer.push(arguments);}
+  	gtag('js', new Date());
+
+  	gtag('config', 'G-NX2T0MVJLL');
+	</script>
+	
+    <title>Econschool</title>
+  </head>
+  
+  <body>
+    <header>
+      <nav>
+        <ul>
+          <li><a href="#about">About us</a>
+          <button class="dropdown-btn">▼</button>
+          <ul  class="dropdown-menu">
+          <li><a href="#team">Team</a></li>
+          <li><a href="#results">Past results</a></li>
+      	  </ul>          
+      	  </li>
+      	  
+          <li><a href="#courses">Courses</a>
+          <button class="dropdown-btn">▼</button>
+
+          <ul  class="dropdown-menu">
+          <li><a href="#forum">Free guided program</a></li>
+          <li><a href="#test">Test series</a></li>
+          <li><a href="#class">Classroom program</a></li>
+
+      	  </ul>          
+      	  </li>
+
+          <li><a href="#resources">Resources</a>
+          <button class="dropdown-btn">▼</button>
+
+          <ul  class="dropdown-menu">
+          <li><a href="#past">Past year exams</a></li>
+          <li><a href="#notes">Books and notes</a></li>
+          <li><a href="#references">References</a></li>
+
+      	  </ul>          
+      	  </li>
+
         </ul>
+      </nav>
+    </header>
+    <aside>
+      <div class="profile-image">
+        <img src="files/logo.jpg" alt="Profile Image">
       </div>
-    </nav>
-  </header>
+      <div class="contact-details">
+        <h3>Econschool</h3>
+ 		<p><i class="fas fa-envelope"></i> <a href="mailto:amit@econschool.in">amit@econschool.in</a></p>
+  		<p><i class="fas fa-phone"></i> +91 9818 517101</p>
+        <p><a href="https://twitter.com/Econschool2"><i class="fa fa-twitter-square"></i></a> Follow for updates</p>
+        <p><a href="https://www.linkedin.com/company/econschool/"><i class="fa fa-linkedin-square"></i></a> Connect with our alumni </p>
+        <p><a href="https://www.youtube.com/channel/UCZ81SBnUzggmauRYP5OXJyQ"><i class="fa-brands fa-youtube-square"></i></a> Free video lectures</p>
+        <p><a href="https://econschool.quora.com/"><i class="fa-brands fa-quora"></i></a> Answers to FAQ's</p>
+        <p><a href="https://www.facebook.com/EconSchoolX"><i class="fa-brands fa-facebook"></i></a> Facebook page</p>
+        <p><a href="https://piazza.com/class/j9llzujhf0n1c0"><i class="ai ai-piazza-square"></i></a> Free piazza forum</p>
+        <p><a href="https://g.page/r/CUl7dbKnTzL2EB0/review"><i class="fa-solid fa-comment"></i></a> Google reviews</p>
+            
+        </div>
+      	</div>
+    </aside>
+    
+    
+    <main>
+    
+    <section id="about">
+    <h2>About us</h2>
+    
+    <section id="courses">
+    <h2>Courses</h2>
+    
+    </section>
 
-  <!-- About Section -->
-  <section id="about">
-    <div class="container">
-      <h1>About Us</h1>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, massa id luctus condimentum, metus ante tempor magna, non commodo dolor ligula eu nulla. Quisque congue neque id elit malesuada, eget malesuada sem malesuada.</p>
-    </div>
-  </section>
+    <section id="resources">
+	<h2>Resourses</h2>
 
-  <!-- Courses Section -->
-  <section id="courses">
-    <div class="container">
-      <h1>Our Courses</h1>
-      <ul>
-        <li>Course 1</li>
-        <li>Course 2</li>
-        <li>Course 3</li>
-        <li>Course 4</li>
-      </ul>
-    </div>
-  </section>
+    </section>
+    </main>
+    <footer>
+  	<p>&copy; 2023 Econschool</p>
+	</footer>
 
-  <!-- Teachers Section -->
-  <section id="teachers">
-    <div class="container">
-      <h1>Our Teachers</h1>
-      <ul>
-        <li>Teacher 1</li>
-        <li>Teacher 2</li>
-        <li>Teacher 3</li>
-        <li>Teacher 4</li>
-      </ul>
-    </div>
-  </section>
-
-</body>
+  </body>
 </html>

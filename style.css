@@ -1,0 +1,119 @@
+<link rel="stylesheet" href="https://kit.fontawesome.com/fa0d550621.css" crossorigin="anonymous">
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: #333;
+  color: #fff;
+  padding: 10px;
+}
+
+header nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+}
+
+header nav li {
+  margin: 0 10px;
+}
+
+header nav a {
+  color: #fff;
+  text-decoration: none;
+}
+
+
+aside {
+  position: fixed;
+  top: 50px;
+  bottom: 0;
+  left: 0;
+  width: 200px;
+  background-color: #ddd;
+  padding: 10px;
+}
+
+.profile-image img {
+  width: 100%;
+}
+
+
+
+main {
+  margin: 50px 0 0 200px;
+  padding: 20px 50px;
+}
+
+@media (max-width: 767px) {
+  header {
+    position: static;
+  }
+
+  aside {
+    position: static;
+    width: 100%;
+  }
+
+  main {
+    margin: 20px 0;
+    padding: 10px 20px;
+  }
+}
+
+section h2 {
+  margin-top: 30px;
+}
+
+
+.social-media-links a {
+  display: inline-block;
+  margin-right: 10px;
+  font-size: 20px;
+  color: #333;
+  transition: all 0.2s ease-in-out;
+}
+
+.social-media-links a:hover {
+  color: #fff;
+}
+
+footer {
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+    z-index: 2
+}
+
+
+.abstract {
+  display: none;
+  background-color: #E5E4E2;
+  padding: 10px;
+}
+
+.dropdown-menu {
+  display: none;
+}
+
+.dropdown-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.dropdown-btn:focus + .dropdown-menu {
+  display: block;
+}
+
