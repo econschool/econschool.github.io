@@ -1,63 +1,105 @@
-<!-- index.html -->
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Educational Institute</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-</head>
-<body>
-  <!-- Header Section -->
-  <header>
-    <nav class="navbar navbar-default">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <a class="navbar-brand" href="#">Educational Institute</a>
-        </div>
-        <ul class="nav navbar-nav navbar-right">
-          <li><a href="about.html">About</a></li>
-          <li><a href="courses.html">Courses</a></li>
-          <li><a href="teachers.html">Teachers</a></li>
-          <li><a href="contact.html">Contact</a></li>
-        </ul>
-      </div>
-    </nav>
-  </header>
+  <head>
+    <title>Educational Institute</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700">
+    <style>
+      /* General Styles */
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
 
-  <!-- Main Content -->
-  <div class="container">
-    <h1>Welcome to Our Educational Institute</h1>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, massa id luctus condimentum, metus ante tempor magna, non commodo dolor ligula eu nulla. Quisque congue neque id elit malesuada, eget malesuada sem malesuada.</p>
-  </div>
-</body>
-</html>
+      body {
+        background: #f2f2f2;
+        font-family: 'Open Sans', sans-serif;
+      }
 
-<!-- about.html -->
-<!DOCTYPE html>
-<html>
-<head>
-  <title>About Us - Educational Institute</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-</head>
-<body>
-  <!-- Header Section -->
-  <header>
-    <nav class="navbar navbar-default">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <a class="navbar-brand" href="#">Educational Institute</a>
-        </div>
-        <ul class="nav navbar-nav navbar-right">
-          <li><a href="index.html">Home</a></li>
-          <li><a href="courses.html">Courses</a></li>
-          <li><a href="teachers.html">Teachers</a></li>
-          <li><a href="contact.html">Contact</a></li>
-        </ul>
-      </div>
-    </nav>
-  </header>
+      .container {
+        max-width: 1200px;
+        margin: 50px auto;
+        padding: 20px;
+      }
 
-  <!-- Main Content
+      /* Header Styles */
+      header {
+        background: #333;
+        color: #fff;
+        padding: 10px 20px;
+        text-align: center;
+      }
+
+      header h1 {
+        font-size: 36px;
+        margin-top: 10px;
+      }
+
+      /* About Section Styles */
+      #about {
+        background: #fff;
+        padding: 20px;
+        text-align: center;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+      }
+
+      #about h2 {
+        font-size: 24px;
+        margin-bottom: 20px;
+      }
+
+      #about p {
+        font-size: 16px;
+        margin-bottom: 20px;
+        line-height: 1.5;
+        color: #333;
+      }
+
+      /* Features Section Styles */
+      #features {
+        background: #f2f2f2;
+        padding: 20px;
+        text-align: center;
+      }
+
+      #features h2 {
+        font-size: 24px;
+        margin-bottom: 20px;
+      }
+
+      .feature {
+        display: inline-block;
+        width: calc(33.33% - 20px);
+        margin: 20px;
+        text-align: left;
+        background: #fff;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+      }
+
+      .feature i {
+        font-size: 36px;
+        margin-bottom: 20px;
+        color: #f2c924;
+      }
+
+      .feature h3 {
+        font-size: 18px;
+        margin-bottom: 10px;
+      }
+
+      .feature p {
+        font-size: 16px;
+        color: #333;
+        margin-bottom: 20px;
+      }
+
+      /* Teachers Section Styles */
+      #teachers {
+        background: #fff;
+        padding: 20px;
+        text-align: center;
+        box-shadow:
