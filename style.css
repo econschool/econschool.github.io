@@ -1,19 +1,30 @@
-<link rel="stylesheet" href="https://kit.fontawesome.com/fa0d550621.css" crossorigin="anonymous">
+/* ── Econschool Brand Theme ── */
+:root {
+  --es-violet:  #5A1BA6;
+  --es-terra:   #A03A2C;
+  --es-sage:    #7A9E7E;
+  --es-cream:   #FAF7F2;
+  --es-dark:    #1e1e2e;
+}
 
 body {
   margin: 0;
   padding: 0;
   font-family: Arial, sans-serif;
+  background-color: var(--es-cream);
+  color: #222;
 }
 
+/* ── Header ── */
 header {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  background-color: #333;
+  background-color: var(--es-violet);
   color: #fff;
   padding: 10px;
+  z-index: 100;
 }
 
 header nav ul {
@@ -26,94 +37,254 @@ header nav ul {
 
 header nav li {
   margin: 0 10px;
+  position: relative;
 }
 
 header nav a {
   color: #fff;
   text-decoration: none;
+  font-weight: bold;
+  letter-spacing: 0.03em;
 }
 
-
-aside {
-  position: fixed;
-  top: 50px;
-  bottom: 0;
-  left: 0;
-  width: 200px;
-  background-color: #ddd;
-  padding: 10px;
+header nav a:hover {
+  color: #f0d9ff;
 }
 
-.profile-image img {
-  width: 70%;
-}
-
-
-
-main {
-  margin: 50px 0 0 200px;
-  padding: 20px 50px;
-}
-
-@media (max-width: 767px) {
-  header {
-    position: static;
-  }
-
-  aside {
-    position: static;
-    width: 100%;
-  }
-
-  main {
-    margin: 20px 0;
-    padding: 10px 20px;
-  }
-}
-
-section h2 {
-  margin-top: 30px;
-}
-
-
-.social-media-links a {
-  display: inline-block;
-  margin-right: 10px;
-  font-size: 20px;
-  color: #333;
-  transition: all 0.2s ease-in-out;
-}
-
-.social-media-links a:hover {
-  color: #fff;
-}
-
-footer {
-    background-color: #333;
-    color: #fff;
-    padding: 10px;
-    text-align: center;
-    z-index: 2
-}
-
-
-.abstract {
-  display: none;
-  background-color: #E5E4E2;
-  padding: 10px;
-}
-
+/* ── Dropdown ── */
 .dropdown-menu {
   display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: var(--es-violet);
+  list-style: none;
+  padding: 8px 0;
+  min-width: 180px;
+  border-top: 2px solid var(--es-sage);
+  z-index: 200;
+}
+
+.dropdown-menu li a {
+  display: block;
+  padding: 6px 16px;
+  font-weight: normal;
+  white-space: nowrap;
+}
+
+.dropdown-menu li a:hover {
+  background-color: #3d1270;
 }
 
 .dropdown-btn {
   background: transparent;
   border: none;
   cursor: pointer;
+  color: #fff;
+  font-size: 10px;
 }
 
 .dropdown-btn:focus + .dropdown-menu {
   display: block;
 }
 
+/* ── Sidebar ── */
+aside {
+  position: fixed;
+  top: 50px;
+  bottom: 0;
+  left: 0;
+  width: 210px;
+  background-color: #f0e8fa;
+  border-right: 2px solid var(--es-sage);
+  padding: 16px 12px;
+  overflow-y: auto;
+}
+
+.profile-image img {
+  width: 70%;
+  border-radius: 8px;
+}
+
+aside h2 {
+  color: var(--es-violet);
+  font-size: 1.1rem;
+  margin: 10px 0 6px;
+  text-align: center;
+}
+
+aside p {
+  font-size: 0.88rem;
+  margin: 6px 0;
+  color: #333;
+}
+
+aside a {
+  color: var(--es-violet);
+  text-decoration: none;
+}
+
+aside a:hover {
+  color: var(--es-terra);
+}
+
+aside i {
+  margin-right: 6px;
+  color: var(--es-terra);
+}
+
+/* ── Main Content ── */
+main {
+  margin: 60px 0 0 230px;
+  padding: 30px 50px;
+}
+
+section {
+  margin-bottom: 50px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid var(--es-sage);
+}
+
+section h2 {
+  color: var(--es-violet);
+  font-size: 1.4rem;
+  letter-spacing: 0.05em;
+  margin-bottom: 16px;
+  text-transform: uppercase;
+}
+
+section h3 {
+  color: var(--es-terra);
+  margin-top: 20px;
+  margin-bottom: 6px;
+}
+
+section p {
+  line-height: 1.7;
+  color: #333;
+}
+
+/* ── Team Cards ── */
+.team-grid {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+  margin-top: 16px;
+}
+
+.team-card {
+  background: #fff;
+  border: 1px solid #e0d5f0;
+  border-top: 3px solid var(--es-violet);
+  border-radius: 6px;
+  padding: 20px;
+  width: 220px;
+}
+
+.team-card h3 {
+  color: var(--es-violet);
+  margin: 0 0 6px;
+  font-size: 1rem;
+}
+
+.team-card p {
+  font-size: 0.88rem;
+  color: #555;
+  margin: 0;
+}
+
+/* ── Course Cards ── */
+.course-grid {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-top: 16px;
+}
+
+.course-card {
+  background: #fff;
+  border: 1px solid #e0d5f0;
+  border-left: 4px solid var(--es-terra);
+  border-radius: 4px;
+  padding: 18px 20px;
+  flex: 1;
+  min-width: 220px;
+}
+
+.course-card h3 {
+  color: var(--es-terra);
+  margin: 0 0 8px;
+  font-size: 1rem;
+}
+
+.course-card p {
+  font-size: 0.88rem;
+  color: #444;
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* ── Resource Lists ── */
+.resource-list {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0;
+}
+
+.resource-list li {
+  padding: 8px 0;
+  border-bottom: 1px solid #e8e0d5;
+  font-size: 0.95rem;
+}
+
+.resource-list li a {
+  color: var(--es-violet);
+  text-decoration: none;
+}
+
+.resource-list li a:hover {
+  color: var(--es-terra);
+  text-decoration: underline;
+}
+
+/* ── Abstract toggle ── */
+.abstract {
+  display: none;
+  background-color: #f0e8fa;
+  padding: 10px;
+  border-left: 3px solid var(--es-sage);
+  margin-top: 6px;
+  font-size: 0.9rem;
+}
+
+/* ── Footer ── */
+footer {
+  background-color: var(--es-violet);
+  color: #fff;
+  padding: 14px;
+  text-align: center;
+  font-size: 0.85rem;
+  margin-left: 230px;
+}
+
+/* ── Responsive ── */
+@media (max-width: 767px) {
+  header { position: static; }
+
+  aside {
+    position: static;
+    width: 100%;
+    border-right: none;
+    border-bottom: 2px solid var(--es-sage);
+    box-sizing: border-box;
+  }
+
+  main {
+    margin: 20px 0;
+    padding: 10px 20px;
+  }
+
+  footer { margin-left: 0; }
+
+  .team-grid, .course-grid { flex-direction: column; }
+}
