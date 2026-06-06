@@ -1,11 +1,25 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
 ---
 
 <Layout>
-	<Welcome />
+	<main>
+		<h1>Econschool</h1>
+		<p>
+			A learning resource for students preparing for graduate study in
+			economics — lectures, problem-solving, and a research-to-problem video
+			series. (Placeholder text; we'll build the real content later.)
+		</p>
+		<p><a href="https://www.youtube.com/@econ.school">YouTube channel</a></p>
+		<hr />
+		<p>More to come.</p>
+	</main>
 </Layout>
+
+<style>
+	main {
+		max-width: 70ch;
+		margin: 0 auto;
+		padding: 3rem 1.5rem;
+	}
+</style>

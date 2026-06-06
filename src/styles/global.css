@@ -1,0 +1,50 @@
+/* ============================================================
+   Econschool brand palette — defined once, referenced everywhere.
+   Same idea as \definecolor in your TikZ files: change a value
+   here and it propagates to every page that uses it.
+   ============================================================ */
+:root {
+  /* Brand layer */
+  --es-violet:     #5A1BA6;  /* titles, primary accents */
+  --es-terracotta: #A03A2C;  /* wordmark, subheadings, links */
+  --es-sage:       #B8C5B5;  /* horizontal rules, dividers */
+  --es-cream:      #FAF7F2;  /* page background — never pure white */
+  --es-ink:        #1F1F1F;  /* body text — never pure black */
+  --es-gray:       #555555;  /* captions, secondary text */
+  
+  /* Typefaces */
+  --es-font-display: "Playfair Display", Georgia, serif;
+  --es-font-body:    "Lora", Georgia, serif;
+
+  /* Diagram-notation layer (used when we build diagrams later) */
+  --es-agent1:      #2E6FB5;
+  --es-agent2:      #C4302B;
+  --es-equilibrium: #E58E26;
+  --es-highlight:   #E8C979;
+  --es-pareto:      #3A7A5E;
+  --es-annotation:  #1F7A8C;
+}
+
+body {
+  margin: 0;
+  background-color: var(--es-cream);
+  color: var(--es-ink);
+  font-family: var(--es-font-body);
+  line-height: 1.6;
+}
+
+h1, h2, h3 {
+  color: var(--es-violet);
+  text-align: left;
+  font-family: var(--es-font-display);
+  font-weight: 700;
+}
+
+a {
+  color: var(--es-terracotta);
+}
+
+hr {
+  border: none;
+  border-top: 1px solid var(--es-sage);
+}
