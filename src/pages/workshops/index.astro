@@ -1,0 +1,20 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const workshops = (await getCollection('workshops'))
+  .filter((workshop) => !workshop.data.draft)
+  .sort((a, b) => (b.data.date?.getTime() ?? 0) - (a.data.date?.getTime() ?? 0));
+---
+
+<Layout title="Workshops">
+  <h1>Workshops</h1>
+  <ul>
+    {workshops.map((workshop) => (
+      <li>
+        <a href={`/workshops/${workshop.id}/`}>{workshop.data.title}</a>
+        <p>{workshop.data.summary}</p>
+      </li>
+    ))}
+  </ul>
+</Layout>
