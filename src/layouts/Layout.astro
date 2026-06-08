@@ -27,10 +27,13 @@ const isActive = (href) => {
 				<a href="/" class="wordmark">Econschool</a>
 				<nav class="main-nav" aria-label="Primary">
 					<a href="/workshops/" aria-current={isActive('/workshops/') ? 'page' : undefined}>Workshops</a>
+					<a href="/problems/" aria-current={isActive('/problems/') ? 'page' : undefined}>Problems &amp; Tools</a>
 					<a href="/prep/" aria-current={isActive('/prep/') ? 'page' : undefined}>Prep program</a>
 				</nav>
 			</div>
-			<a href="/" class="logo" aria-label="Econschool home">ES</a>
+			<a href="/" class="logo" aria-label="Econschool home">
+				<img src="/es-logo.png" alt="Econschool" width="278" height="120" />
+			</a>
 		</header>
 
 		<main class="content">
@@ -104,18 +107,15 @@ const isActive = (href) => {
 		border-bottom: 2px solid var(--es-terracotta);
 		padding-bottom: 2px;
 	}
+
 	.logo {
 		display: inline-flex;
-		align-items: center;
-		justify-content: center;
-		width: 48px;
-		height: 48px;
-		background-color: var(--es-ink);
-		color: var(--es-cream);
-		font-family: var(--es-font-display);
-		font-weight: 700;
-		text-decoration: none;
-		border-radius: 4px;
+	}
+
+	.logo img {
+		height: 30px;
+		width: auto;
+		display: block;
 	}
 
 	.content {
