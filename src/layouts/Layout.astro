@@ -4,6 +4,11 @@ import '@fontsource/playfair-display/700.css';
 import '@fontsource/lora/400.css';
 import '@fontsource/lora/700.css';
 import '../styles/global.css';
+const path = Astro.url.pathname.replace(/\/$/, '') || '/';
+const isActive = (href) => {
+	const h = href.replace(/\/$/, '') || '/';
+	return h === '/' ? path === '/' : (path === h || path.startsWith(h + '/'));
+};
 ---
 <!doctype html>
 <html lang="en">
@@ -17,7 +22,12 @@ import '../styles/global.css';
 	</head>
 	<body>
 		<header class="site-header">
-			<a href="/" class="wordmark">Econschool</a>
+			<div class="header-left">
+				<a href="/" class="wordmark">Econschool</a>
+				<nav class="main-nav" aria-label="Primary">
+					<a href="/workshops/" aria-current={isActive('/workshops/') ? 'page' : undefined}>Workshops</a>
+				</nav>
+			</div>
 			<a href="/" class="logo" aria-label="Econschool home">ES</a>
 		</header>
 
@@ -67,6 +77,31 @@ import '../styles/global.css';
 		text-decoration: none;
 	}
 
+	.header-left {
+		display: flex;
+		align-items: baseline;
+		gap: 1.5rem;
+	}
+
+	.main-nav {
+		display: flex;
+		gap: 1.25rem;
+	}
+
+	.main-nav a {
+		color: var(--es-ink);
+		text-decoration: none;
+	}
+
+	.main-nav a:hover {
+		color: var(--es-terracotta);
+	}
+
+	.main-nav a[aria-current="page"] {
+		color: var(--es-terracotta);
+		border-bottom: 2px solid var(--es-terracotta);
+		padding-bottom: 2px;
+	}
 	.logo {
 		display: inline-flex;
 		align-items: center;
