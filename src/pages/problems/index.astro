@@ -1,0 +1,51 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+
+const typeLabel = {
+	solved: 'Solved problem',
+	exercise: 'Exercise',
+	tool: 'Tool',
+};
+
+const items = (await getCollection('problems'))
+	.filter((p) => !p.data.draft)
+	.sort((a, b) => (b.data.date?.getTime() ?? 0) - (a.data.date?.getTime() ?? 0));
+---
+<Layout title="Problems & Tools">
+	<h1>Problems &amp; Tools</h1>
+	<p>Solved problems, exercises to try, and interactive tools for visualising economics.</p>
+
+	<ul class="post-list">
+		{items.map((p) => (
+			<li class="post">
+				<span class="tag">{typeLabel[p.data.type]}</span>
+				<h2><a href={`/problems/${p.id}/`}>{p.data.title}</a></h2>
+				<p>{p.data.summary}</p>
+			</li>
+		))}
+	</ul>
+</Layout>
+
+<style>
+	.post-list {
+		list-style: none;
+		padding: 0;
+	}
+
+	.post {
+		padding: 1.25rem 0;
+		border-bottom: 1px solid var(--es-sage);
+	}
+
+	.post h2 {
+		margin: 0.3rem 0;
+	}
+
+	.tag {
+		font-size: 0.75rem;
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+		color: var(--es-gray);
+	}
+</style>
