@@ -2,18 +2,35 @@
 import Layout from '../../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
 
-const workshops = (await getCollection('workshops'))
-  .filter((workshop) => !workshop.data.draft)
-  .sort((a, b) => (b.data.date?.getTime() ?? 0) - (a.data.date?.getTime() ?? 0));
----
+const workshops = (await getCollection('workshops', ({ data }) => !data.draft))
+  .sort((a, b) => (b.data.date?.valueOf() ?? 0) - (a.data.date?.valueOf() ?? 0));
 
-<Layout title="Workshops">
-  <h1>Workshops</h1>
-  <ul>
-    {workshops.map((workshop) => (
+const fmt = (d?: Date) =>
+  d ? d.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' }) : 'Dates to be announced';
+---
+<Layout title="Workshops" width="wide">
+  <div class="page-head">
+    <span class="eyebrow">Workshops</span>
+    <h1>Working skills, taught through economics</h1>
+    <p class="standfirst">
+      Short, live workshops on the computational and writing skills graduate study
+      assumes — Python, R, LaTeX, and the honest use of AI tools.
+    </p>
+  </div>
+
+  <ul class="postcard-grid">
+    {workshops.map((w) => (
       <li>
-        <a href={`/workshops/${workshop.id}/`}>{workshop.data.title}</a>
-        <p>{workshop.data.summary}</p>
+        <a class="postcard" href={`/workshops/${w.id}/`}>
+          <span class="card-sub">{w.data.level}</span>
+          <h3>{w.data.title}</h3>
+          <hr class="card-rule" />
+          <p class="card-body">{w.data.summary}</p>
+          <span class="card-foot">
+            <span>{fmt(w.data.date)}</span>
+            <span>{w.data.topics.slice(0, 2).join(' · ')}</span>
+          </span>
+        </a>
       </li>
     ))}
   </ul>

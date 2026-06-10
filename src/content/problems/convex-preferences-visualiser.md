@@ -1,10 +1,15 @@
 ---
-title: "Convex preferences: UMP & EMP visualiser"
-summary: "Interactive tool for utility maximisation and expenditure minimisation under convex and kinked preferences."
+title: Convex Preferences Visualiser
+summary: An interactive tool — move the parameters of a CES utility function and watch the indifference map change shape, from Leontief to linear.
 type: tool
-topics: ["consumer theory", "optimisation"]
-embed: "https://amitkumargoyal.github.io/econschool-tools/convex_preferences_visualiser.html"
-embedHeight: 760
+topics: [consumer theory, CES utility, visualisation]
+level: Beginner
+embed: https://amitkumargoyal.github.io/econschool-tools/convex-preferences/
+embedHeight: 620
+date: 2026-05-30
+draft: false
 ---
 
-Pick a utility function, then choose whether to maximise utility (UMP) or minimise expenditure (EMP). Adjust the prices and income with the sliders and watch the optimum move — an interior tangency on the smooth arm, a kink, or a corner.
+Drag the substitution parameter and watch the indifference curves move between the
+Leontief and linear extremes. Built to make the CES family something you can see,
+not only derive.

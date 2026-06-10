@@ -1,147 +1,251 @@
 ---
+// The layout skeleton every page inherits: header (wordmark · nav · ES logo),
+// sage rules, content slot, sticky footer. Header and footer use the wide
+// measure (1080px); prose pages keep the 760px column via <main>.
+import '../styles/global.css';
 import '@fontsource/playfair-display/400.css';
 import '@fontsource/playfair-display/700.css';
 import '@fontsource/lora/400.css';
-import '@fontsource/lora/700.css';
-import '../styles/global.css';
+import '@fontsource/lora/400-italic.css';
+import '@fontsource/lora/600.css';
 import 'katex/dist/katex.min.css';
-const path = Astro.url.pathname.replace(/\/$/, '') || '/';
-const isActive = (href) => {
-	const h = href.replace(/\/$/, '') || '/';
-	return h === '/' ? path === '/' : (path === h || path.startsWith(h + '/'));
-};
+
+interface Props {
+  title: string;
+  description?: string;
+  /** Pass "wide" for pages that use the full 1080px measure (e.g. the homepage). */
+  width?: 'prose' | 'wide';
+}
+
+const {
+  title,
+  description = 'Econschool — lectures, solved problems, and a preparatory program for students aiming at graduate study in economics.',
+  width = 'prose',
+} = Astro.props;
+
+// Active-state helper: a section stays lit on its detail pages too.
+const normalize = (p: string) => (p.endsWith('/') ? p : p + '/');
+const current = normalize(Astro.url.pathname);
+const isActive = (href: string) =>
+  href === '/' ? current === '/' : current.startsWith(normalize(href));
+
+const nav = [
+  { href: '/start-here/', label: 'Start Here' },
+  { href: '/prep/', label: 'Prep Program' },
+  { href: '/workshops/', label: 'Workshops' },
+  { href: '/problems/', label: 'Problems & Tools' },
+  { href: '/resources/', label: 'Resources' },
+  { href: '/announcements/', label: 'News' },
+  { href: '/about/', label: 'About' },
+];
 ---
+
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Econschool</title>
-	</head>
-	<body>
-		<header class="site-header">
-			<div class="header-left">
-				<a href="/" class="wordmark">Econschool</a>
-				<nav class="main-nav" aria-label="Primary">
-					<a href="/workshops/" aria-current={isActive('/workshops/') ? 'page' : undefined}>Workshops</a>
-					<a href="/problems/" aria-current={isActive('/problems/') ? 'page' : undefined}>Problems &amp; Tools</a>
-					<a href="/prep/" aria-current={isActive('/prep/') ? 'page' : undefined}>Prep program</a>
-				</nav>
-			</div>
-			<a href="/" class="logo" aria-label="Econschool home">
-				<img src="/es-logo.png" alt="Econschool" width="278" height="120" />
-			</a>
-		</header>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <title>{title === 'Econschool' ? title : `${title} · Econschool`}</title>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="header-inner">
+        <a class="wordmark" href="/">Econschool</a>
 
-		<main class="content">
-			<slot />
-		</main>
+        <button
+          class="nav-toggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="site-nav"
+        >
+          <span class="visually-hidden">Menu</span>
+          <span class="bar" aria-hidden="true"></span>
+          <span class="bar" aria-hidden="true"></span>
+          <span class="bar" aria-hidden="true"></span>
+        </button>
 
-		<footer class="site-footer">
-			<span>econschool.in</span>
-			<nav class="footer-links">
-				<a href="https://www.youtube.com/@econ.school">YouTube</a>
-			</nav>
-		</footer>
-	</body>
+        <nav id="site-nav" class="site-nav" aria-label="Main">
+          <ul>
+            {nav.map((item) => (
+              <li>
+                <a
+                  href={item.href}
+                  aria-current={isActive(item.href) ? 'page' : undefined}
+                >
+                  {item.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        <a class="logo-link" href="/" aria-label="Econschool home">
+          <img src="/es-logo.svg" alt="" width="34" height="32" />
+        </a>
+      </div>
+      <hr class="rule" />
+    </header>
+
+    <main class={width === 'wide' ? 'wide' : undefined}>
+      <slot />
+    </main>
+
+    <footer class="site-footer">
+      <hr class="rule" />
+      <div class="footer-inner">
+        <div>
+          <span class="footer-mark">Econschool</span>
+          <span class="fine">econschool.in — a lasting resource for economics students.</span>
+        </div>
+        <ul class="footer-links">
+          <li><a href="https://www.youtube.com/@econ.school">YouTube</a></li>
+          <li><a href="/announcements/">Announcements</a></li>
+          <li><a href="/about/">About</a></li>
+          <li><a href="/about/#contact">Contact</a></li>
+        </ul>
+      </div>
+    </footer>
+
+    <script>
+      // Mobile menu: a plain toggle, no framework.
+      const toggle = document.querySelector('.nav-toggle');
+      const navEl = document.getElementById('site-nav');
+      toggle?.addEventListener('click', () => {
+        const open = toggle.getAttribute('aria-expanded') === 'true';
+        toggle.setAttribute('aria-expanded', String(!open));
+        navEl?.classList.toggle('open', !open);
+      });
+    </script>
+
+    <style>
+      .site-header .header-inner,
+      .site-footer .footer-inner {
+        max-width: var(--es-wide-width);
+        margin: 0 auto;
+        padding: 0 var(--es-gutter);
+      }
+
+      .header-inner {
+        display: flex;
+        align-items: center;
+        gap: 1.6rem;
+        padding-top: 1.1rem !important;
+        padding-bottom: 1rem !important;
+      }
+
+      .wordmark {
+        font-family: var(--es-font-display);
+        font-weight: 700;
+        font-size: 1.45rem;
+        color: var(--es-terracotta);
+        border-bottom: none;
+        white-space: nowrap;
+      }
+
+      .site-nav { flex: 1; }
+
+      .site-nav ul {
+        display: flex;
+        gap: 1.35rem;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        flex-wrap: wrap;
+      }
+
+      .site-nav a {
+        font-size: 0.92rem;
+        color: var(--es-ink);
+        border-bottom: 1px solid transparent;
+        white-space: nowrap;
+        padding-bottom: 2px;
+      }
+
+      .site-nav a:hover { color: var(--es-terracotta); }
+
+      .site-nav a[aria-current='page'] {
+        color: var(--es-terracotta);
+        border-bottom-color: var(--es-terracotta);
+      }
+
+      .logo-link { border-bottom: none; display: flex; }
+      .logo-link img { height: 32px; width: auto; }
+
+      .nav-toggle { display: none; }
+
+      @media (max-width: 920px) {
+        .nav-toggle {
+          display: inline-flex;
+          flex-direction: column;
+          gap: 5px;
+          margin-left: auto;
+          background: none;
+          border: none;
+          padding: 6px 4px;
+          cursor: pointer;
+        }
+        .nav-toggle .bar {
+          width: 22px;
+          height: 2px;
+          background: var(--es-ink);
+        }
+        .nav-toggle[aria-expanded='true'] .bar { background: var(--es-terracotta); }
+
+        .site-nav {
+          display: none;
+          flex-basis: 100%;
+          order: 4;
+        }
+        .site-nav.open { display: block; }
+        .site-nav ul {
+          flex-direction: column;
+          gap: 0;
+          padding: 0.4rem 0 0.6rem;
+        }
+        .site-nav li { border-top: 1px solid var(--es-sage); }
+        .site-nav a {
+          display: block;
+          padding: 0.65rem 0;
+          font-size: 1rem;
+        }
+        .header-inner { flex-wrap: wrap; gap: 1rem; }
+      }
+
+      .site-footer .footer-inner {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        gap: 1.5rem;
+        flex-wrap: wrap;
+        padding-top: 1.2rem !important;
+        padding-bottom: 1.6rem !important;
+      }
+
+      .footer-mark {
+        font-family: var(--es-font-display);
+        font-weight: 700;
+        color: var(--es-terracotta);
+        margin-right: 0.7rem;
+      }
+
+      .footer-links {
+        display: flex;
+        gap: 1.2rem;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        flex-wrap: wrap;
+      }
+
+      .footer-links a {
+        font-size: 0.88rem;
+        color: var(--es-gray);
+        border-bottom-color: transparent;
+      }
+      .footer-links a:hover { color: var(--es-terracotta); }
+    </style>
+  </body>
 </html>
-
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-	}
-
-	body {
-		display: flex;
-		flex-direction: column;
-		min-height: 100vh;
-	}
-
-	.site-header {
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-		max-width: 760px;
-		width: 100%;
-		margin: 0 auto;
-		padding: 1.5rem;
-		box-sizing: border-box;
-		border-bottom: 1px solid var(--es-sage);
-	}
-
-	.wordmark {
-		font-family: var(--es-font-display);
-		font-weight: 700;
-		font-size: 1.5rem;
-		color: var(--es-terracotta);
-		text-decoration: none;
-	}
-
-	.header-left {
-		display: flex;
-		align-items: baseline;
-		gap: 1.5rem;
-	}
-
-	.main-nav {
-		display: flex;
-		gap: 1.25rem;
-	}
-
-	.main-nav a {
-		color: var(--es-ink);
-		text-decoration: none;
-	}
-
-	.main-nav a:hover {
-		color: var(--es-terracotta);
-	}
-
-	.main-nav a[aria-current="page"] {
-		color: var(--es-terracotta);
-		border-bottom: 2px solid var(--es-terracotta);
-		padding-bottom: 2px;
-	}
-
-	.logo {
-		display: inline-flex;
-	}
-
-	.logo img {
-		height: 30px;
-		width: auto;
-		display: block;
-	}
-
-	.content {
-		flex: 1;
-		max-width: 760px;
-		width: 100%;
-		margin: 0 auto;
-		padding: 2rem 1.5rem;
-		box-sizing: border-box;
-	}
-
-	.site-footer {
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-		max-width: 760px;
-		width: 100%;
-		margin: 0 auto;
-		padding: 1.5rem;
-		box-sizing: border-box;
-		border-top: 1px solid var(--es-sage);
-		font-size: 0.9rem;
-		color: var(--es-gray);
-	}
-
-	.footer-links a {
-		margin-left: 1rem;
-	}
-</style>

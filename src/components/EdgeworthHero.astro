@@ -1,0 +1,94 @@
+---
+// The homepage hero: a real Edgeworth box (Cobb–Douglas, computed — not sketched).
+// Colors follow the Econschool notation layer: blue = person 1, red = person 2,
+// green = Pareto set, orange = endowment & equilibrium, ochre = gains from trade.
+---
+
+<figure class="edgeworth">
+  <svg viewBox="0 0 480 340" xmlns="http://www.w3.org/2000/svg" role="img"
+    aria-label="Edgeworth box showing two agents' indifference curves through the endowment, the lens of gains from trade, the contract curve, and a competitive equilibrium on a budget line.">
+
+    <!-- gains-from-trade lens -->
+    <path class="lens" d="M 160.0 142.5 L 164.2 143.7 L 168.5 145.0 L 172.7 146.3 L 177.0 147.6 L 181.2 149.0 L 185.5 150.4 L 189.7 151.9 L 194.0 153.5 L 198.2 155.0 L 202.4 156.7 L 206.7 158.3 L 210.9 160.1 L 215.2 161.9 L 219.4 163.8 L 223.7 165.7 L 227.9 167.8 L 232.2 169.9 L 236.4 172.0 L 240.6 174.3 L 244.9 176.7 L 249.1 179.2 L 253.4 181.8 L 257.6 184.5 L 261.9 187.3 L 266.1 190.3 L 270.4 193.4 L 274.6 196.7 L 278.8 200.2 L 283.1 203.9 L 287.3 207.7 L 291.6 211.9 L 295.8 216.2 L 300.1 220.8 L 304.3 225.8 L 308.6 231.1 L 312.8 236.7 L 317.0 242.8 L 321.3 249.4 L 325.5 256.5 L 325.5 256.5 L 321.3 255.6 L 317.0 254.7 L 312.8 253.7 L 308.6 252.7 L 304.3 251.6 L 300.1 250.5 L 295.8 249.3 L 291.6 248.1 L 287.3 246.9 L 283.1 245.5 L 278.8 244.2 L 274.6 242.7 L 270.4 241.2 L 266.1 239.6 L 261.9 237.9 L 257.6 236.2 L 253.4 234.3 L 249.1 232.4 L 244.9 230.3 L 240.6 228.1 L 236.4 225.9 L 232.2 223.4 L 227.9 220.8 L 223.7 218.1 L 219.4 215.2 L 215.2 212.1 L 210.9 208.8 L 206.7 205.3 L 202.4 201.5 L 198.2 197.5 L 194.0 193.1 L 189.7 188.4 L 185.5 183.4 L 181.2 177.9 L 177.0 172.0 L 172.7 165.6 L 168.5 158.6 L 164.2 150.9 L 160.0 142.5 Z" fill="var(--es-region)" opacity="0.45"/>
+
+    <!-- box frame -->
+    <rect x="50" y="35" width="360" height="260" fill="none"
+      stroke="var(--es-axis)" stroke-width="1.1"/>
+
+    <!-- axis direction arrows (agent 1, bottom-left; agent 2 reversed, top-right) -->
+    <g stroke="var(--es-axis)" stroke-width="0.9" fill="var(--es-axis)">
+      <line x1="50" y1="295" x2="96" y2="295"/><path d="M96 295 l-6 -2.4 v4.8 Z"/>
+      <line x1="50" y1="295" x2="50" y2="252"/><path d="M50 252 l-2.4 6 h4.8 Z"/>
+      <line x1="410" y1="35" x2="364" y2="35"/><path d="M364 35 l6 -2.4 v4.8 Z"/>
+      <line x1="410" y1="35" x2="410" y2="78"/><path d="M410 78 l-2.4 -6 h4.8 Z"/>
+    </g>
+
+    <!-- contract curve (Pareto set) -->
+    <path class="draw cc" d="M 52.0 294.4 L 58.0 292.4 L 64.1 290.4 L 70.1 288.3 L 76.1 286.3 L 82.2 284.1 L 88.2 282.0 L 94.2 279.8 L 100.3 277.5 L 106.3 275.2 L 112.3 272.9 L 118.4 270.5 L 124.4 268.0 L 130.4 265.5 L 136.5 263.0 L 142.5 260.4 L 148.5 257.7 L 154.6 255.0 L 160.6 252.2 L 166.6 249.3 L 172.7 246.4 L 178.7 243.4 L 184.7 240.4 L 190.8 237.3 L 196.8 234.1 L 202.8 230.8 L 208.9 227.4 L 214.9 224.0 L 220.9 220.5 L 227.0 216.8 L 233.0 213.1 L 239.1 209.3 L 245.1 205.4 L 251.1 201.4 L 257.2 197.3 L 263.2 193.0 L 269.2 188.7 L 275.3 184.2 L 281.3 179.6 L 287.3 174.8 L 293.4 169.9 L 299.4 164.9 L 305.4 159.7 L 311.5 154.3 L 317.5 148.8 L 323.5 143.1 L 329.6 137.2 L 335.6 131.1 L 341.6 124.8 L 347.7 118.3 L 353.7 111.5 L 359.7 104.6 L 365.8 97.3 L 371.8 89.8 L 377.8 82.0 L 383.9 73.9 L 389.9 65.5 L 395.9 56.8 L 402.0 47.7 L 408.0 38.2" fill="none"
+      stroke="var(--es-pareto)" stroke-width="1.6"/>
+
+    <!-- indifference curves through the endowment -->
+    <path class="draw u1" d="M 128.0 39.5 L 132.6 60.8 L 137.3 79.2 L 141.9 95.4 L 146.6 109.6 L 151.2 122.2 L 155.9 133.4 L 160.5 143.5 L 165.2 152.6 L 169.8 160.8 L 174.4 168.2 L 179.1 175.0 L 183.7 181.2 L 188.4 186.9 L 193.0 192.1 L 197.7 196.9 L 202.3 201.4 L 206.9 205.5 L 211.6 209.3 L 216.2 212.9 L 220.9 216.2 L 225.5 219.3 L 230.2 222.2 L 234.8 225.0 L 239.5 227.5 L 244.1 229.9 L 248.7 232.2 L 253.4 234.3 L 258.0 236.4 L 262.7 238.3 L 267.3 240.1 L 272.0 241.8 L 276.6 243.4 L 281.3 245.0 L 285.9 246.4 L 290.5 247.8 L 295.2 249.2 L 299.8 250.4 L 304.5 251.7 L 309.1 252.8 L 313.8 253.9 L 318.4 255.0 L 323.1 256.0 L 327.7 257.0 L 332.3 257.9 L 337.0 258.8 L 341.6 259.7 L 346.3 260.5 L 350.9 261.3 L 355.6 262.1 L 360.2 262.8 L 364.8 263.5 L 369.5 264.2 L 374.1 264.8 L 378.8 265.5 L 383.4 266.1 L 388.1 266.7 L 392.7 267.3 L 397.4 267.8 L 402.0 268.4" fill="none"
+      stroke="var(--es-agent1)" stroke-width="1.6"/>
+    <path class="draw u2" d="M 74.0 123.2 L 78.5 124.0 L 83.1 124.9 L 87.6 125.7 L 92.1 126.6 L 96.6 127.4 L 101.2 128.3 L 105.7 129.3 L 110.2 130.2 L 114.7 131.2 L 119.3 132.2 L 123.8 133.2 L 128.3 134.2 L 132.8 135.3 L 137.4 136.4 L 141.9 137.6 L 146.4 138.7 L 150.9 139.9 L 155.5 141.2 L 160.0 142.5 L 164.5 143.8 L 169.0 145.1 L 173.6 146.5 L 178.1 148.0 L 182.6 149.5 L 187.1 151.0 L 191.7 152.6 L 196.2 154.3 L 200.7 156.0 L 205.2 157.8 L 209.8 159.6 L 214.3 161.5 L 218.8 163.5 L 223.3 165.6 L 227.9 167.7 L 232.4 170.0 L 236.9 172.3 L 241.4 174.8 L 246.0 177.3 L 250.5 180.0 L 255.0 182.8 L 259.5 185.8 L 264.1 188.9 L 268.6 192.1 L 273.1 195.6 L 277.6 199.2 L 282.2 203.1 L 286.7 207.2 L 291.2 211.5 L 295.7 216.1 L 300.3 221.1 L 304.8 226.4 L 309.3 232.1 L 313.8 238.2 L 318.4 244.8 L 322.9 252.0 L 327.4 259.9 L 331.9 268.5 L 336.5 278.0 L 341.0 288.5" fill="none"
+      stroke="var(--es-agent2)" stroke-width="1.6"/>
+
+    <!-- budget line through endowment and equilibrium -->
+    <path class="draw price" d="M 110.0 107.8 L 370.0 288.1" fill="none"
+      stroke="var(--es-axis)" stroke-width="1" stroke-dasharray="4 4"/>
+
+    <!-- endowment and equilibrium -->
+    <circle cx="160.0" cy="142.5" r="4" fill="var(--es-equilibrium)"/>
+    <circle cx="248.0" cy="203.5" r="4" fill="var(--es-equilibrium)"/>
+
+    <!-- labels: italic serif, per the diagram conventions -->
+    <g font-family="var(--es-font-body)" font-style="italic" font-size="14"
+      fill="var(--es-ink)">
+      <text x="36" y="316">O₁</text>
+      <text x="416" y="26">O₂</text>
+      <text x="100" y="312" font-size="12">x₁</text>
+      <text x="32" y="256" font-size="12">y₁</text>
+      <text x="352" y="28" font-size="12">x₂</text>
+      <text x="418" y="86" font-size="12">y₂</text>
+      <text x="134" y="134">ω</text>
+      <text x="258" y="195">x*</text>
+      <text x="120" y="58" fill="var(--es-agent1)">u₁</text>
+      <text x="298" y="262" fill="var(--es-agent2)">u₂</text>
+    </g>
+  </svg>
+  <figcaption class="fine">
+    Color is notation on this site: <span style="color: var(--es-agent1)">person 1</span>,
+    <span style="color: var(--es-agent2)">person 2</span>,
+    <span style="color: var(--es-pareto)">the Pareto set</span>,
+    <span style="color: var(--es-equilibrium)">endowment and equilibrium</span> — the
+    same conventions across every diagram, postcard, and video.
+  </figcaption>
+</figure>
+
+<style>
+  .edgeworth {
+    margin: 0;
+  }
+  .edgeworth svg {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  .edgeworth figcaption {
+    margin-top: 0.6rem;
+    line-height: 1.5;
+  }
+  /* Quiet draw-on when the page loads; disabled under prefers-reduced-motion
+     by the global rule. */
+  .draw {
+    stroke-dasharray: 900;
+    stroke-dashoffset: 900;
+    animation: es-draw 1.4s ease-out forwards;
+  }
+  .u2    { animation-delay: 0.25s; }
+  .cc    { animation-delay: 0.5s; }
+  .price { animation-delay: 0.8s; }
+  @keyframes es-draw {
+    to { stroke-dashoffset: 0; }
+  }
+</style>

@@ -1,26 +1,62 @@
 ---
-title: "Cobb–Douglas demand"
-summary: "Derive the Marshallian demands for a Cobb–Douglas consumer."
+title: Deriving Demand from Cobb–Douglas Preferences
+summary: A complete derivation of Marshallian demand for Cobb–Douglas utility, with every step of the working shown.
 type: solved
-topics: ["consumer theory", "optimisation"]
+topics: [consumer theory, demand]
 level: Beginner
-date: 2026-06-08
+date: 2026-05-20
+draft: false
 ---
 
-A consumer has utility $u(x, y) = x^{\alpha} y^{1-\alpha}$ with $\alpha \in (0, 1)$, faces prices $p_x, p_y > 0$, and has income $m > 0$. Find the Marshallian demands.
+## Problem
+
+A consumer has utility $u(x, y) = x^{\alpha} y^{1-\alpha}$ with $\alpha \in (0,1)$,
+prices $p_x, p_y > 0$, and income $m > 0$. Derive the Marshallian demand functions.
 
 ## Solution
 
-Maximise $u$ subject to $p_x x + p_y y = m$. The first-order conditions give
+The consumer solves
 
 $$
-\frac{\alpha\, u}{x} = \lambda p_x, \qquad \frac{(1-\alpha)\, u}{y} = \lambda p_y .
+\max_{x,\,y \ \geq\, 0} \; x^{\alpha} y^{1-\alpha}
+\quad \text{subject to} \quad p_x x + p_y y = m.
 $$
 
-Dividing one by the other, $\dfrac{\alpha}{1-\alpha}\cdot\dfrac{y}{x} = \dfrac{p_x}{p_y}$, so $p_y y = \dfrac{1-\alpha}{\alpha}\, p_x x$. Substituting into the budget constraint,
+**Step 1 — The budget binds.** Utility is strictly increasing in both goods, so the
+constraint holds with equality at any optimum.
+
+**Step 2 — Tangency.** Preferences are strictly convex on the interior, so the
+optimum is characterised by the tangency condition $MRS = p_x / p_y$:
 
 $$
-x^\star = \frac{\alpha m}{p_x}, \qquad y^\star = \frac{(1-\alpha) m}{p_y}.
+\frac{\partial u/\partial x}{\partial u/\partial y}
+= \frac{\alpha\, x^{\alpha-1} y^{1-\alpha}}{(1-\alpha)\, x^{\alpha} y^{-\alpha}}
+= \frac{\alpha}{1-\alpha}\cdot\frac{y}{x}
+= \frac{p_x}{p_y}.
 $$
 
-The consumer spends a constant share $\alpha$ of income on $x$ and $1-\alpha$ on $y$.
+**Step 3 — Solve the system.** From the tangency condition,
+$p_y y = \frac{1-\alpha}{\alpha}\, p_x x$. Substituting into the budget constraint:
+
+$$
+p_x x + \frac{1-\alpha}{\alpha}\, p_x x = m
+\;\;\Longrightarrow\;\;
+p_x x \cdot \frac{1}{\alpha} = m.
+$$
+
+So the demand functions are
+
+$$
+x^*(p_x, p_y, m) = \frac{\alpha m}{p_x},
+\qquad
+y^*(p_x, p_y, m) = \frac{(1-\alpha)\, m}{p_y}.
+$$
+
+**Interpretation.** The consumer spends the fixed share $\alpha$ of income on $x$
+and $1-\alpha$ on $y$, regardless of prices. Constant expenditure shares are the
+signature of Cobb–Douglas preferences — worth recognising instantly in exams.
+
+## Check your understanding
+
+1. Verify that each demand function is homogeneous of degree zero in $(p_x, p_y, m)$.
+2. Compute the indirect utility function $v(p_x, p_y, m)$ and verify Roy's identity.

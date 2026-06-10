@@ -1,0 +1,23 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const items = await getCollection('announcements', ({ data }) => !data.draft);
+  return items.map((a) => ({ params: { id: a.id }, props: { item: a } }));
+}
+
+const { item } = Astro.props;
+const { Content } = await render(item);
+const fmt = (d: Date) =>
+  d.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+---
+<Layout title={item.data.title} description={item.data.summary}>
+  <div class="page-head">
+    <span class="eyebrow">{fmt(item.data.date)}</span>
+    <h1>{item.data.title}</h1>
+  </div>
+  <Content />
+  <hr />
+  <p><a href="/announcements/">← All announcements</a></p>
+</Layout>

@@ -1,50 +1,374 @@
-/* ============================================================
-   Econschool brand palette — defined once, referenced everywhere.
-   Same idea as \definecolor in your TikZ files: change a value
-   here and it propagates to every page that uses it.
-   ============================================================ */
+/* ==========================================================================
+   Econschool — global stylesheet
+   Single source of truth for the brand system on the web.
+   Mirrors the TikZ \definecolor practice: every color is a named variable,
+   referenced via var(--es-…) everywhere. Never raw hex outside this block.
+   ========================================================================== */
+
+/* ----- 1. Palette ------------------------------------------------------- */
+
 :root {
   /* Brand layer */
-  --es-violet:     #5A1BA6;  /* titles, primary accents */
-  --es-terracotta: #A03A2C;  /* wordmark, subheadings, links */
-  --es-sage:       #B8C5B5;  /* horizontal rules, dividers */
-  --es-cream:      #FAF7F2;  /* page background — never pure white */
-  --es-ink:        #1F1F1F;  /* body text — never pure black */
-  --es-gray:       #555555;  /* captions, secondary text */
-  
-  /* Typefaces */
-  --es-font-display: "Playfair Display", Georgia, serif;
-  --es-font-body:    "Lora", Georgia, serif;
+  --es-violet: #5a1ba6;       /* titles, H1s, primary accent          */
+  --es-terracotta: #a03a2c;   /* wordmark, links, subheadings         */
+  --es-sage: #b8c5b5;         /* horizontal rules, separators         */
+  --es-cream: #faf7f2;        /* page background — never pure white   */
+  --es-ink: #1f1f1f;          /* body text — never pure black         */
+  --es-gray: #555555;         /* captions, fine print                 */
 
-  /* Diagram-notation layer (used when we build diagrams later) */
-  --es-agent1:      #2E6FB5;
-  --es-agent2:      #C4302B;
-  --es-equilibrium: #E58E26;
-  --es-highlight:   #E8C979;
-  --es-pareto:      #3A7A5E;
-  --es-annotation:  #1F7A8C;
+  /* Diagram-notation layer (color is notation — reserved meanings) */
+  --es-agent1: #2e6fb5;       /* person 1 / agent 1                   */
+  --es-agent2: #c4302b;       /* person 2 / agent 2                   */
+  --es-equilibrium: #e58e26;  /* equilibrium points, endowments       */
+  --es-region: #e8c979;       /* highlighted / feasible regions       */
+  --es-pareto: #3a7a5e;       /* Pareto sets, contract curves         */
+  --es-annotation: #1f7a8c;   /* callout arrows, secondary pointers   */
+  --es-axis: #3f3f3f;         /* diagram axes — dark gray, not black  */
+
+  /* Derived tints (cream-mixed, for subtle fills only) */
+  --es-violet-wash: #f1ecf8;
+  --es-sage-wash: #eef1ed;
+
+  /* Typeface roles */
+  --es-font-display: 'Playfair Display', Georgia, serif;
+  --es-font-body: 'Lora', Georgia, serif;
+  --es-font-mono: ui-monospace, 'JetBrains Mono', Consolas, monospace;
+
+  /* Layout */
+  --es-content-width: 760px;  /* prose column — 65–75 characters      */
+  --es-wide-width: 1080px;    /* header / footer / card grids         */
+  --es-gutter: 1.25rem;
+}
+
+/* ----- 2. Base ----------------------------------------------------------- */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--es-cream);
+  color: var(--es-ink);
+  font-family: var(--es-font-body);
+  font-size: 17px;
+  line-height: 1.65;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
   margin: 0;
-  background-color: var(--es-cream);
-  color: var(--es-ink);
-  font-family: var(--es-font-body);
-  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
-h1, h2, h3 {
-  color: var(--es-violet);
-  text-align: left;
+main {
+  flex: 1;
+  width: 100%;
+  max-width: var(--es-content-width);
+  margin: 0 auto;
+  padding: 2.5rem var(--es-gutter) 4rem;
+}
+
+/* A page that needs the wide measure (card grids, the homepage)
+   opts in with <main class="wide">; prose inside still uses .prose. */
+main.wide {
+  max-width: var(--es-wide-width);
+}
+
+.prose {
+  max-width: var(--es-content-width);
+}
+
+/* ----- 3. Typography ------------------------------------------------------ */
+
+h1, h2, h3, h4 {
   font-family: var(--es-font-display);
   font-weight: 700;
+  color: var(--es-violet);
+  line-height: 1.2;
+  text-align: left;        /* titles are left-aligned, never centered */
+  margin: 0 0 0.6em;
 }
+
+h1 { font-size: 2.3rem; letter-spacing: -0.01em; }
+h2 { font-size: 1.55rem; margin-top: 2.2em; }
+h3 { font-size: 1.2rem; margin-top: 1.8em; }
+
+p { margin: 0 0 1.1em; }
 
 a {
   color: var(--es-terracotta);
+  text-decoration: none;
+  border-bottom: 1px solid color-mix(in srgb, var(--es-terracotta) 35%, transparent);
+  transition: border-color 120ms ease;
+}
+
+a:hover { border-bottom-color: var(--es-terracotta); }
+
+a:focus-visible {
+  outline: 2px solid var(--es-violet);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+strong { font-weight: 600; }
+
+small, .fine {
+  color: var(--es-gray);
+  font-size: 0.85rem;
+}
+
+blockquote {
+  margin: 1.5em 0;
+  padding: 0 0 0 1.1em;
+  border-left: 3px solid var(--es-sage);
+  color: var(--es-gray);
+  font-style: italic;
+}
+
+code {
+  font-family: var(--es-font-mono);
+  font-size: 0.85em;
+  background: var(--es-sage-wash);
+  padding: 0.1em 0.35em;
+  border-radius: 3px;
+}
+
+pre {
+  background: var(--es-sage-wash);
+  border: 1px solid var(--es-sage);
+  border-radius: 6px;
+  padding: 1rem 1.2rem;
+  overflow-x: auto;
+  line-height: 1.5;
+}
+
+pre code { background: none; padding: 0; }
+
+ul, ol { padding-left: 1.4rem; margin: 0 0 1.1em; }
+li { margin-bottom: 0.35em; }
+
+/* Display math gets a touch more presence than prose, per the type scale */
+.katex-display { font-size: 1.1em; margin: 1.4em 0; overflow-x: auto; }
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1.4em 0;
+  font-size: 0.95rem;
+}
+
+th, td {
+  text-align: left;
+  padding: 0.5em 0.9em 0.5em 0;
+  border-bottom: 1px solid var(--es-sage);
+}
+
+th {
+  font-family: var(--es-font-display);
+  font-weight: 700;
+  color: var(--es-violet);
 }
 
 hr {
   border: none;
   border-top: 1px solid var(--es-sage);
+  margin: 2.5rem 0;
+}
+
+img { max-width: 100%; height: auto; }
+
+/* ----- 4. Shared building blocks ----------------------------------------- */
+
+/* The sage rule — the brand's divider, used between page regions */
+.rule {
+  border: none;
+  border-top: 1px solid var(--es-sage);
+  margin: 0;
+}
+
+/* Eyebrow: small terracotta label above a title (e.g. section names) */
+.eyebrow {
+  display: block;
+  font-family: var(--es-font-body);
+  font-size: 0.78rem;
+  font-style: normal;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--es-terracotta);
+  margin-bottom: 0.7rem;
+}
+
+/* Page header block: eyebrow + H1 + standfirst, closed by a sage rule —
+   the postcard title block, applied to a page */
+.page-head { margin-bottom: 2.2rem; }
+.page-head h1 { margin-bottom: 0.35em; }
+.page-head .standfirst {
+  font-size: 1.08rem;
+  color: var(--es-gray);
+  max-width: 60ch;
+  margin-bottom: 1.6rem;
+}
+.page-head::after {
+  content: '';
+  display: block;
+  border-top: 1px solid var(--es-sage);
+}
+
+/* ----- 5. The postcard card system ---------------------------------------
+   Every card on the site is a miniature Econschool postcard:
+   title block → sage rule → content → footer line.                        */
+
+.postcard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  gap: 1.4rem;
+  margin: 1.8rem 0;
+  padding: 0;
+  list-style: none;
+}
+
+.postcard {
+  display: flex;
+  flex-direction: column;
+  background: #fffdfa;
+  border: 1px solid var(--es-sage);
+  border-radius: 4px;
+  padding: 1.3rem 1.4rem 1.1rem;
+  transition: border-color 140ms ease, transform 140ms ease;
+}
+
+.postcard:hover {
+  border-color: var(--es-terracotta);
+  transform: translateY(-2px);
+}
+
+.postcard h3, .postcard h2 {
+  margin: 0 0 0.2em;
+  font-size: 1.15rem;
+}
+
+.postcard .card-sub {
+  font-size: 0.8rem;
+  color: var(--es-terracotta);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 0.7rem;
+}
+
+.postcard .card-rule {
+  border: none;
+  border-top: 1px solid var(--es-sage);
+  margin: 0 0 0.8rem;
+}
+
+.postcard .card-body {
+  flex: 1;
+  font-size: 0.95rem;
+  color: var(--es-ink);
+  margin-bottom: 0.9rem;
+}
+
+.postcard .card-foot {
+  font-size: 0.8rem;
+  color: var(--es-gray);
+  border-top: 1px solid var(--es-sage);
+  padding-top: 0.6rem;
+  display: flex;
+  justify-content: space-between;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+/* Cards whose whole surface is a link */
+a.postcard {
+  color: inherit;
+  border-bottom: 1px solid var(--es-sage);
+}
+a.postcard:hover { border-bottom-color: var(--es-terracotta); }
+
+/* ----- 6. Listing rows (announcements, compact lists) -------------------- */
+
+.list-rows { list-style: none; padding: 0; margin: 1.5rem 0; }
+
+.list-rows li {
+  border-bottom: 1px solid var(--es-sage);
+  padding: 1.05rem 0;
+  margin: 0;
+}
+
+.list-rows .row-date {
+  font-size: 0.8rem;
+  color: var(--es-gray);
+  display: block;
+  margin-bottom: 0.15rem;
+}
+
+.list-rows .row-title {
+  font-family: var(--es-font-display);
+  font-weight: 700;
+  font-size: 1.08rem;
+}
+
+.list-rows .row-title a {
+  color: var(--es-violet);
+  border-bottom-color: transparent;
+}
+.list-rows .row-title a:hover { border-bottom-color: var(--es-violet); }
+
+.list-rows .row-summary {
+  font-size: 0.93rem;
+  color: var(--es-gray);
+  margin: 0.25rem 0 0;
+}
+
+/* ----- 7. Buttons --------------------------------------------------------- */
+
+.button {
+  display: inline-block;
+  font-family: var(--es-font-body);
+  font-size: 0.95rem;
+  color: var(--es-cream);
+  background: var(--es-violet);
+  padding: 0.55em 1.2em;
+  border-radius: 4px;
+  border-bottom: none;
+}
+
+.button:hover {
+  background: var(--es-terracotta);
+  border-bottom: none;
+}
+
+.button.secondary {
+  background: transparent;
+  color: var(--es-violet);
+  box-shadow: inset 0 0 0 1px var(--es-violet);
+}
+
+.button.secondary:hover {
+  color: var(--es-terracotta);
+  box-shadow: inset 0 0 0 1px var(--es-terracotta);
+  background: transparent;
+}
+
+/* ----- 8. Accessibility & motion ------------------------------------------ */
+
+.visually-hidden {
+  position: absolute;
+  width: 1px; height: 1px;
+  margin: -1px; padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

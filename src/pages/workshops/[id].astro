@@ -3,21 +3,38 @@ import Layout from '../../layouts/Layout.astro';
 import { getCollection, render } from 'astro:content';
 
 export async function getStaticPaths() {
-  const workshops = await getCollection('workshops');
-  return workshops.map((workshop) => ({
-    params: { id: workshop.id },
-    props: { workshop },
-  }));
+  const workshops = await getCollection('workshops', ({ data }) => !data.draft);
+  return workshops.map((w) => ({ params: { id: w.id }, props: { workshop: w } }));
 }
 
 const { workshop } = Astro.props;
 const { Content } = await render(workshop);
+const fmt = (d?: Date) =>
+  d ? d.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' }) : null;
 ---
-
-<Layout title={workshop.data.title}>
-  <article>
+<Layout title={workshop.data.title} description={workshop.data.summary}>
+  <div class="page-head">
+    <span class="eyebrow">Workshop · {workshop.data.level}</span>
     <h1>{workshop.data.title}</h1>
-    <p>{workshop.data.summary}</p>
-    <Content />
-  </article>
+    <p class="standfirst">{workshop.data.summary}</p>
+    <p class="fine meta-line">
+      {fmt(workshop.data.date) && <span>Next run: {fmt(workshop.data.date)}</span>}
+      <span>Topics: {workshop.data.topics.join(', ')}</span>
+    </p>
+  </div>
+
+  <Content />
+
+  <hr />
+  <p>
+    {workshop.data.registration
+      ? <a class="button" href={workshop.data.registration}>Register</a>
+      : <>Registration opens via the <a href="/announcements/">announcements page</a>;
+        questions are welcome at the <a href="/about/#contact">contact address</a>.</>
+    }
+  </p>
 </Layout>
+
+<style>
+  .meta-line { display: flex; gap: 1.4rem; flex-wrap: wrap; margin-bottom: 1.6rem; }
+</style>

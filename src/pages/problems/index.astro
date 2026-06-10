@@ -1,51 +1,36 @@
 ---
-import { getCollection } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
 
-const typeLabel = {
-	solved: 'Solved problem',
-	exercise: 'Exercise',
-	tool: 'Tool',
-};
+const problems = (await getCollection('problems', ({ data }) => !data.draft))
+  .sort((a, b) => (b.data.date?.valueOf() ?? 0) - (a.data.date?.valueOf() ?? 0));
 
-const items = (await getCollection('problems'))
-	.filter((p) => !p.data.draft)
-	.sort((a, b) => (b.data.date?.getTime() ?? 0) - (a.data.date?.getTime() ?? 0));
+const typeLabel = { solved: 'Solved problem', exercise: 'Exercise', tool: 'Interactive tool' };
 ---
-<Layout title="Problems & Tools">
-	<h1>Problems &amp; Tools</h1>
-	<p>Solved problems, exercises to try, and interactive tools for visualising economics.</p>
+<Layout title="Problems & Tools" width="wide">
+  <div class="page-head">
+    <span class="eyebrow">Problems &amp; Tools</span>
+    <h1>Solve, check, and explore</h1>
+    <p class="standfirst">
+      Solved problems with every step shown, exercises to attempt unaided, and
+      interactive tools. Attempt before you read — the struggle is the point.
+    </p>
+  </div>
 
-	<ul class="post-list">
-		{items.map((p) => (
-			<li class="post">
-				<span class="tag">{typeLabel[p.data.type]}</span>
-				<h2><a href={`/problems/${p.id}/`}>{p.data.title}</a></h2>
-				<p>{p.data.summary}</p>
-			</li>
-		))}
-	</ul>
+  <ul class="postcard-grid">
+    {problems.map((p) => (
+      <li>
+        <a class="postcard" href={`/problems/${p.id}/`}>
+          <span class="card-sub">{typeLabel[p.data.type]}{p.data.level && ` · ${p.data.level}`}</span>
+          <h3>{p.data.title}</h3>
+          <hr class="card-rule" />
+          <p class="card-body">{p.data.summary}</p>
+          <span class="card-foot">
+            <span>{p.data.topics.slice(0, 2).join(' · ')}</span>
+            <span>Open →</span>
+          </span>
+        </a>
+      </li>
+    ))}
+  </ul>
 </Layout>
-
-<style>
-	.post-list {
-		list-style: none;
-		padding: 0;
-	}
-
-	.post {
-		padding: 1.25rem 0;
-		border-bottom: 1px solid var(--es-sage);
-	}
-
-	.post h2 {
-		margin: 0.3rem 0;
-	}
-
-	.tag {
-		font-size: 0.75rem;
-		text-transform: uppercase;
-		letter-spacing: 0.05em;
-		color: var(--es-gray);
-	}
-</style>

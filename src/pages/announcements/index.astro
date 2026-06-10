@@ -1,0 +1,33 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const items = (await getCollection('announcements', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+const fmt = (d: Date) =>
+  d.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+const catLabel = { program: 'Prep Program', workshop: 'Workshop', video: 'New content', site: 'Site' };
+---
+<Layout title="News & Announcements">
+  <div class="page-head">
+    <span class="eyebrow">News</span>
+    <h1>Announcements</h1>
+    <p class="standfirst">
+      Course dates, new problems and videos, and site news — everything worth
+      knowing, in one place.
+    </p>
+  </div>
+
+  <ul class="list-rows">
+    {items.map((a) => (
+      <li>
+        <span class="row-date">
+          {fmt(a.data.date)}{a.data.category && ` · ${catLabel[a.data.category]}`}
+        </span>
+        <span class="row-title"><a href={`/announcements/${a.id}/`}>{a.data.title}</a></span>
+        <p class="row-summary">{a.data.summary}</p>
+      </li>
+    ))}
+  </ul>
+</Layout>

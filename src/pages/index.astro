@@ -1,15 +1,157 @@
 ---
+// Homepage: hero (thesis + Edgeworth box), three ways in, featured problem,
+// latest announcements.
 import Layout from '../layouts/Layout.astro';
+import EdgeworthHero from '../components/EdgeworthHero.astro';
+import { getCollection } from 'astro:content';
+import katex from 'katex';
+
+const announcements = (await getCollection('announcements', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 3);
+
+const fmt = (d: Date) =>
+  d.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+
+// Featured problem equation, rendered to HTML at build time.
+const eq = katex.renderToString(
+  'x^*(p_x, p_y, m) = \\frac{\\alpha m}{p_x}, \\qquad y^*(p_x, p_y, m) = \\frac{(1-\\alpha)\\, m}{p_y}',
+  { displayMode: true, throwOnError: true }
+);
 ---
 
-<Layout>
-	<h1>Preparing for graduate study in economics</h1>
-	<p>
-		Econschool is a learning resource for students aiming at MA and PhD
-		programs — lectures, problem-solving, and a research-to-problem video
-		series that turns ideas from leading economics papers into problems you
-		can work through at the master's level. (Placeholder text; we'll refine
-		this later.)
-	</p>
-	<p><a href="https://www.youtube.com/@econ.school">YouTube channel</a></p>
+<Layout title="Econschool" width="wide">
+  <section class="hero">
+    <div class="hero-text">
+      <span class="eyebrow">Econschool</span>
+      <h1>Economics, with the rigor graduate school expects.</h1>
+      <p class="standfirst">
+        Lectures, solved problems, and a preparatory program for students aiming at
+        MA and PhD programs in economics — DSE, ISI, and beyond. Built as a lasting
+        resource for students, free to learn from.
+      </p>
+      <p class="hero-actions">
+        <a class="button" href="/start-here/">Start here</a>
+        <a class="button secondary" href="https://www.youtube.com/@econ.school">Watch on YouTube</a>
+      </p>
+    </div>
+    <div class="hero-figure">
+      <EdgeworthHero />
+    </div>
+  </section>
+
+  <hr class="rule section-rule" />
+
+  <section>
+    <h2 class="section-title">Three ways in</h2>
+    <ul class="postcard-grid">
+      <li>
+        <a class="postcard" href="/prep/">
+          <span class="card-sub">Prep Program</span>
+          <h3>Prepare for entrance exams</h3>
+          <hr class="card-rule" />
+          <p class="card-body">
+            A structured program in microeconomics, mathematics, and statistics for
+            MA/PhD entrance examinations — taught live, with problem-solving at the
+            centre.
+          </p>
+          <span class="card-foot"><span>Live online</span><span>Apply →</span></span>
+        </a>
+      </li>
+      <li>
+        <a class="postcard" href="/workshops/">
+          <span class="card-sub">Workshops</span>
+          <h3>Build working skills</h3>
+          <hr class="card-rule" />
+          <p class="card-body">
+            Short, practical workshops on Python, R, LaTeX, and AI tools — the
+            computational skills graduate study assumes, taught through economics.
+          </p>
+          <span class="card-foot"><span>Short courses</span><span>Browse →</span></span>
+        </a>
+      </li>
+      <li>
+        <a class="postcard" href="/problems/">
+          <span class="card-sub">Problems &amp; Tools</span>
+          <h3>Solve real problems</h3>
+          <hr class="card-rule" />
+          <p class="card-body">
+            Solved problems with every step shown, exercises to attempt unaided, and
+            interactive tools — including research papers restated as MA-level
+            problems.
+          </p>
+          <span class="card-foot"><span>Free, growing library</span><span>Open →</span></span>
+        </a>
+      </li>
+    </ul>
+  </section>
+
+  <hr class="rule section-rule" />
+
+  <section class="featured prose">
+    <h2 class="section-title">From the problem library</h2>
+    <p>
+      Cobb–Douglas demand — the derivation every entrance exam assumes you can
+      reproduce, with each step of the working shown:
+    </p>
+    <div class="featured-math" set:html={eq} />
+    <p>
+      Constant expenditure shares, regardless of prices — the signature of
+      Cobb–Douglas preferences.
+      <a href="/problems/cobb-douglas-demand/">See the full derivation →</a>
+    </p>
+  </section>
+
+  <hr class="rule section-rule" />
+
+  <section class="prose">
+    <h2 class="section-title">Latest from Econschool</h2>
+    <ul class="list-rows">
+      {announcements.map((a) => (
+        <li>
+          <span class="row-date">{fmt(a.data.date)}</span>
+          <span class="row-title"><a href={`/announcements/${a.id}/`}>{a.data.title}</a></span>
+          <p class="row-summary">{a.data.summary}</p>
+        </li>
+      ))}
+    </ul>
+    <p><a href="/announcements/">All announcements →</a></p>
+  </section>
 </Layout>
+
+<style>
+  .hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+    gap: 3rem;
+    align-items: center;
+    padding: 1.5rem 0 2.5rem;
+  }
+  .hero h1 { font-size: 2.6rem; margin-bottom: 0.45em; }
+  .hero .standfirst {
+    font-size: 1.1rem;
+    color: var(--es-gray);
+    max-width: 46ch;
+  }
+  .hero-actions {
+    display: flex;
+    gap: 0.8rem;
+    flex-wrap: wrap;
+    margin-top: 1.6rem;
+  }
+  .section-rule { margin: 0; }
+  section { padding: 2.4rem 0; }
+  .section-title { margin-top: 0; }
+  .featured-math {
+    background: #fffdfa;
+    border: 1px solid var(--es-sage);
+    border-radius: 4px;
+    padding: 0.4rem 1rem;
+    margin: 1.2rem 0;
+    overflow-x: auto;
+  }
+  @media (max-width: 820px) {
+    .hero { grid-template-columns: 1fr; gap: 2rem; }
+    .hero h1 { font-size: 2.1rem; }
+  }
+</style>

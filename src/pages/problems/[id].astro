@@ -1,44 +1,52 @@
 ---
-import { getCollection, render } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
+import { getCollection, render } from 'astro:content';
 
 export async function getStaticPaths() {
-	const problems = await getCollection('problems');
-	return problems.map((problem) => ({
-		params: { id: problem.id },
-		props: { problem },
-	}));
+  const problems = await getCollection('problems', ({ data }) => !data.draft);
+  return problems.map((p) => ({ params: { id: p.id }, props: { problem: p } }));
 }
 
 const { problem } = Astro.props;
 const { Content } = await render(problem);
-const { title, type, embed, embedHeight = 640 } = problem.data;
+const typeLabel = { solved: 'Solved problem', exercise: 'Exercise', tool: 'Interactive tool' };
+const isTool = problem.data.type === 'tool';
 ---
-<Layout title={title}>
-	<h1>{title}</h1>
+<Layout title={problem.data.title} description={problem.data.summary}>
+  <div class="page-head">
+    <span class="eyebrow">
+      {typeLabel[problem.data.type]}{problem.data.level && ` · ${problem.data.level}`}
+    </span>
+    <h1>{problem.data.title}</h1>
+    <p class="standfirst">{problem.data.summary}</p>
+    {problem.data.source && <p class="fine">Source: {problem.data.source}</p>}
+  </div>
 
-	<Content />
+  {isTool && problem.data.embed && (
+    <div class="tool-frame" style={`--tool-h: ${problem.data.embedHeight ?? 600}px`}>
+      <iframe
+        src={problem.data.embed}
+        title={problem.data.title}
+        loading="lazy"
+      ></iframe>
+    </div>
+  )}
 
-	{type === 'tool' && embed && (
-		<div class="embed-wrap">
-			<iframe
-				src={embed}
-				title={title}
-				loading="lazy"
-				style={`height: ${embedHeight}px;`}
-			></iframe>
-		</div>
-	)}
+  <Content />
 </Layout>
 
 <style>
-	.embed-wrap {
-		margin-top: 1.5rem;
-	}
-
-	.embed-wrap iframe {
-		width: 100%;
-		border: 1px solid var(--es-sage);
-		border-radius: 4px;
-	}
+  .tool-frame {
+    border: 1px solid var(--es-sage);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 1.8rem;
+    background: #fffdfa;
+  }
+  .tool-frame iframe {
+    display: block;
+    width: 100%;
+    height: var(--tool-h);
+    border: none;
+  }
 </style>
