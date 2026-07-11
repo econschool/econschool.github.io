@@ -4,19 +4,6 @@ import { defineCollection } from 'astro:content';
 import { glob } from 'astro/loaders';
 import { z } from 'astro/zod';
 
-const workshops = defineCollection({
-  loader: glob({ pattern: '**/*.md', base: './src/content/workshops' }),
-  schema: z.object({
-    title: z.string(),
-    summary: z.string(),
-    level: z.enum(['Beginner', 'Intermediate', 'Advanced']),
-    topics: z.array(z.string()),
-    date: z.coerce.date().optional(),
-    /** Set when registration is open; renders a sign-up button. */
-    registration: z.string().url().optional(),
-    draft: z.boolean().default(false),
-  }),
-});
 
 // Problems & Tools: one collection with a `type` discriminator —
 // solved problems, exercises, and interactive tools share a listing,
@@ -46,7 +33,7 @@ const announcements = defineCollection({
     title: z.string(),
     date: z.coerce.date(),
     summary: z.string(),
-    category: z.enum(['program', 'workshop', 'video', 'site']).optional(),
+    category: z.enum(['course', 'video', 'site']).optional(),
     draft: z.boolean().default(false),
   }),
 });
@@ -90,4 +77,4 @@ const lessons = defineCollection({
   }),
 });
 
-export const collections = { workshops, problems, announcements, courses, lessons };
+export const collections = { problems, announcements, courses, lessons };

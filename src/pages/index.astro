@@ -15,7 +15,7 @@ const fmt = (d: Date) =>
 
 // Featured problem equation, rendered to HTML at build time.
 const eq = katex.renderToString(
-  'x^*(p_x, p_y, m) = \\frac{\\alpha m}{p_x}, \\qquad y^*(p_x, p_y, m) = \\frac{(1-\\alpha)\\, m}{p_y}',
+  'x^d(p_x, p_y, m) = \\frac{\\alpha m}{p_x}, \\qquad y^d(p_x, p_y, m) = \\frac{(1-\\alpha)\\, m}{p_y}',
   { displayMode: true, throwOnError: true }
 );
 ---
@@ -24,10 +24,10 @@ const eq = katex.renderToString(
   <section class="hero">
     <div class="hero-text">
       <span class="eyebrow">Econschool</span>
-      <h1>Economics, with the rigor graduate school expects.</h1>
+      <h1>Economics, done with rigor.</h1>
       <p class="standfirst">
-        Lectures, solved problems, and a preparatory program for students aiming at
-        MA and PhD programs in economics — DSE, ISI, and beyond. Built as a lasting
+        Lectures, courses, and solved problems in the mathematics, statistics, and
+        economics that serious study requires. Built as a lasting
         resource for students, free to learn from.
       </p>
       <p class="hero-actions">
@@ -46,41 +46,40 @@ const eq = katex.renderToString(
     <h2 class="section-title">Three ways in</h2>
     <ul class="postcard-grid">
       <li>
-        <a class="postcard" href="/prep/">
-          <span class="card-sub">Prep Program</span>
-          <h3>Prepare for entrance exams</h3>
+        <a class="postcard" href="/start-here/">
+          <span class="card-sub">Start Here</span>
+          <h3>Where to begin</h3>
           <hr class="card-rule" />
           <p class="card-body">
-            A structured program in microeconomics, mathematics, and statistics for
-            MA/PhD entrance examinations — taught live, with problem-solving at the
-            centre.
+            A short guide to what the site holds and a suggested order to work
+            through it, from the mathematics up to graduate-level economics.
           </p>
-          <span class="card-foot"><span>Live online</span><span>Apply →</span></span>
+          <span class="card-foot"><span>Orientation</span><span>Read →</span></span>
         </a>
       </li>
       <li>
-        <a class="postcard" href="/workshops/">
-          <span class="card-sub">Workshops</span>
-          <h3>Build working skills</h3>
+        <a class="postcard" href="/courses/">
+          <span class="card-sub">Courses</span>
+          <h3>Study a topic</h3>
           <hr class="card-rule" />
           <p class="card-body">
-            Short, practical workshops on Python, R, LaTeX, and AI tools — the
-            computational skills graduate study assumes, taught through economics.
+            Self-paced courses building toward graduate-level economics, starting
+            with the mathematics. Video lessons with written notes.
           </p>
-          <span class="card-foot"><span>Short courses</span><span>Browse →</span></span>
+          <span class="card-foot"><span>Self-paced</span><span>Browse →</span></span>
         </a>
       </li>
       <li>
         <a class="postcard" href="/problems/">
           <span class="card-sub">Problems &amp; Tools</span>
-          <h3>Solve real problems</h3>
+          <h3>Solve problems</h3>
           <hr class="card-rule" />
           <p class="card-body">
-            Solved problems with every step shown, exercises to attempt unaided, and
-            interactive tools — including research papers restated as MA-level
+            Solved problems, exercises to attempt unaided, and
+            interactive tools, including research papers restated as MA-level
             problems.
           </p>
-          <span class="card-foot"><span>Free, growing library</span><span>Open →</span></span>
+          <span class="card-foot"><span>Free</span><span>Open →</span></span>
         </a>
       </li>
     </ul>
@@ -91,8 +90,7 @@ const eq = katex.renderToString(
   <section class="featured prose">
     <h2 class="section-title">From the problem library</h2>
     <p>
-      Cobb–Douglas demand — the derivation every entrance exam assumes you can
-      reproduce, with each step of the working shown:
+      Cobb–Douglas demand:
     </p>
     <div class="featured-math" set:html={eq} />
     <p>
