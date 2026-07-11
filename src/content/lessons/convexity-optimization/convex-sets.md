@@ -2,6 +2,7 @@
 title: Convex sets
 order: 1
 summary: What convexity means for a set, and why it is the property the rest of the course is built on.
+youtube: uzDtvgUcZj8
 draft: false
 ---
 
