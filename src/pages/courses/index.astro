@@ -1,0 +1,72 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const courses = await getCollection('courses', ({ data }) => !data.draft);
+
+// Pillar display order and labels. Internal keys stay terse in frontmatter;
+// the human-readable wording lives here, so it changes in one place.
+const PILLARS = [
+  ['mathematics', 'Mathematics for Economists'],
+  ['probability-stats', 'Probability & Statistics with Python/R'],
+  ['economics', 'Economics'],
+  ['computational-ai', 'Computational & AI Methods'],
+] as const;
+
+// Group courses under their pillar, each group ordered by `order`, then title.
+const byPillar = PILLARS
+  .map(([key, label]) => ({
+    key,
+    label,
+    items: courses
+      .filter((c) => c.data.pillar === key)
+      .sort(
+        (a, b) =>
+          (a.data.order ?? Infinity) - (b.data.order ?? Infinity) ||
+          a.data.title.localeCompare(b.data.title),
+      ),
+  }))
+  .filter((group) => group.items.length > 0);
+
+const modeLabels: Record<string, string> = {
+  'self-paced': 'Self-paced',
+  'live-online': 'Live online',
+  'in-person': 'In person',
+};
+const fmtModes = (modes: string[]) => modes.map((m) => modeLabels[m] ?? m).join(' · ');
+---
+<Layout title="Courses" width="wide">
+  <div class="page-head">
+    <span class="eyebrow">Courses</span>
+    <h1>Economics, and the mathematics it rests on</h1>
+    <p class="standfirst">
+      A ladder of courses toward serious study of economics — the mathematics,
+      probability, and statistics graduate work assumes, the economics core
+      itself, and the computational methods that now run through all of it.
+      Every course begins free and self-paced.
+    </p>
+  </div>
+
+  {byPillar.map((group) => (
+    <section class="pillar">
+      <h2>{group.label}</h2>
+      <hr class="rule" />
+      <ul class="postcard-grid">
+        {group.items.map((c) => (
+          <li>
+            <a class="postcard" href={`/courses/${c.id}/`}>
+              <span class="card-sub">{c.data.level ?? 'All levels'}</span>
+              <h3>{c.data.title}</h3>
+              <hr class="card-rule" />
+              <p class="card-body">{c.data.summary}</p>
+              <span class="card-foot">
+                <span>{fmtModes(c.data.modes)}</span>
+                <span>{c.data.topics.slice(0, 2).join(' · ')}</span>
+              </span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </section>
+  ))}
+</Layout>

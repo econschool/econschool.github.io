@@ -1,0 +1,83 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const courses = await getCollection('courses', ({ data }) => !data.draft);
+  const lessons = await getCollection('lessons', ({ data }) => !data.draft);
+
+  return courses.map((course) => ({
+    params: { course: course.id },
+    props: {
+      course,
+      lessons: lessons
+        .filter((l) => l.id.startsWith(course.id + '/'))
+        .sort((a, b) => a.data.order - b.data.order),
+    },
+  }));
+}
+
+const { course, lessons } = Astro.props;
+const { Content } = await render(course);
+
+const PILLAR_LABELS: Record<string, string> = {
+  'mathematics': 'Mathematics for Economists',
+  'probability-stats': 'Probability & Statistics with Python/R',
+  'economics': 'Economics',
+  'computational-ai': 'Computational & AI Methods',
+};
+const modeLabels: Record<string, string> = {
+  'self-paced': 'self-paced',
+  'live-online': 'live online',
+  'in-person': 'in person',
+};
+const lessonSlug = (id: string) => id.split('/').pop();
+---
+<Layout title={course.data.title} width="prose">
+  <div class="page-head">
+    <span class="eyebrow">{PILLAR_LABELS[course.data.pillar] ?? 'Course'}</span>
+    <h1>{course.data.title}</h1>
+    <p class="standfirst">{course.data.summary}</p>
+  </div>
+
+  <Content />
+
+  {course.data.prerequisites?.length ? (
+    <p class="fine">Assumed background: {course.data.prerequisites.join(', ')}.</p>
+  ) : null}
+
+  <h2>Lessons</h2>
+  <hr class="rule" />
+  {lessons.length === 0 ? (
+    <p class="fine">Lessons are being written — check back soon.</p>
+  ) : (
+    <ol class="lesson-list">
+      {lessons.map((lesson) => (
+        <li>
+          <a href={`/courses/${course.id}/${lessonSlug(lesson.id)}/`}>
+            <span class="lesson-title">{lesson.data.title}</span>
+            {lesson.data.summary && <span class="lesson-sub">{lesson.data.summary}</span>}
+          </a>
+        </li>
+      ))}
+    </ol>
+  )}
+
+  <p class="fine">Offered {course.data.modes.map((m) => modeLabels[m] ?? m).join(' · ')}.</p>
+
+  <style>
+    .lesson-list { list-style: none; counter-reset: lesson; margin: 0 0 2rem; padding: 0; }
+    .lesson-list li { counter-increment: lesson; border-bottom: 1px solid var(--es-sage); }
+    .lesson-list a {
+      display: grid; grid-template-columns: 2rem 1fr; align-items: baseline;
+      gap: 0.3rem 0.9rem; padding: 0.85rem 0; border-bottom: none; color: var(--es-ink);
+    }
+    .lesson-list a::before {
+      content: counter(lesson); font-family: var(--es-font-display);
+      color: var(--es-terracotta); font-size: 0.95rem;
+    }
+    .lesson-list a:hover .lesson-title { color: var(--es-terracotta); }
+    .lesson-title { font-weight: 600; }
+    .lesson-sub { grid-column: 2; color: var(--es-gray); font-size: 0.9rem; }
+  </style>
+</Layout>
