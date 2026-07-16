@@ -1,6 +1,6 @@
 ---
 title: Deriving Demand from Cobb–Douglas Preferences
-summary: A complete derivation of Marshallian demand for Cobb–Douglas utility, with every step of the working shown.
+summary: A complete derivation of Marshallian demand for Cobb–Douglas utility.
 type: solved
 topics: [consumer theory, demand]
 level: Beginner
@@ -11,7 +11,7 @@ draft: false
 ## Problem
 
 A consumer has utility $u(x, y) = x^{\alpha} y^{1-\alpha}$ with $\alpha \in (0,1)$,
-prices $p_x, p_y > 0$, and income $m > 0$. Derive the Marshallian demand functions.
+prices $p_x, p_y > 0$, and income $M \geq 0$. Derive the Marshallian demand functions.
 
 ## Solution
 
@@ -19,7 +19,7 @@ The consumer solves
 
 $$
 \max_{x,\,y \ \geq\, 0} \; x^{\alpha} y^{1-\alpha}
-\quad \text{subject to} \quad p_x x + p_y y = m.
+\quad \text{subject to} \quad p_x x + p_y y = M.
 $$
 
 **Step 1 — The budget binds.** Utility is strictly increasing in both goods, so the
@@ -39,17 +39,17 @@ $$
 $p_y y = \frac{1-\alpha}{\alpha}\, p_x x$. Substituting into the budget constraint:
 
 $$
-p_x x + \frac{1-\alpha}{\alpha}\, p_x x = m
+p_x x + \frac{1-\alpha}{\alpha}\, p_x x = M
 \;\;\Longrightarrow\;\;
-p_x x \cdot \frac{1}{\alpha} = m.
+p_x x \cdot \frac{1}{\alpha} = M.
 $$
 
 So the demand functions are
 
 $$
-x^*(p_x, p_y, m) = \frac{\alpha m}{p_x},
+x^d(p_x, p_y, M) = \frac{\alpha M}{p_x},
 \qquad
-y^*(p_x, p_y, m) = \frac{(1-\alpha)\, m}{p_y}.
+y^d(p_x, p_y, M) = \frac{(1-\alpha)\, M}{p_y}.
 $$
 
 **Interpretation.** The consumer spends the fixed share $\alpha$ of income on $x$
@@ -58,5 +58,5 @@ signature of Cobb–Douglas preferences — worth recognising instantly in exams
 
 ## Check your understanding
 
-1. Verify that each demand function is homogeneous of degree zero in $(p_x, p_y, m)$.
-2. Compute the indirect utility function $v(p_x, p_y, m)$ and verify Roy's identity.
+1. Verify that each demand function is homogeneous of degree zero in $(p_x, p_y, M)$.
+2. Compute the indirect utility function $v(p_x, p_y, M)$ and verify Roy's identity.
