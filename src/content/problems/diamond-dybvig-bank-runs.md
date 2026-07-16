@@ -1,6 +1,6 @@
 ---
 title: "Bank Runs as a Coordination Problem: Diamond–Dybvig (1983)"
-summary: A research-to-problem entry — the Diamond–Dybvig model of bank runs reduced to an MA-level problem with full working, from the 2022 Nobel-winning paper.
+summary: A research-to-problem entry — the Diamond–Dybvig model of bank runs reduced to a graduate-level problem with full working, from the 2022 Nobel-winning paper.
 type: solved
 topics: [research to problem, game theory, banking, multiple equilibria]
 level: Advanced
@@ -10,7 +10,7 @@ draft: false
 ---
 
 *This entry is part of the **research-to-problem** series: a result from a major
-paper, restated as a problem solvable with MA-level tools, with full working. Read
+paper, restated as a problem solvable with graduate-level tools, with full working. Read
 the problem and attempt it before reading the solution.*
 
 ## Problem

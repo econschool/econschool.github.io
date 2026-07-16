@@ -21,14 +21,14 @@ $\omega_2 = (0, 1)$.
 
 ## Solution
 
-**Step 1 — Demands.** Normalise $p_y = 1$ and write $p$ for the price of good $x$.
+**Step 1 — Demands.** Normalise $p_y = 1$ and write $p_x$ for the price of good $x$.
 Each consumer has Cobb–Douglas preferences, so spends fixed budget shares.
-Consumer 1's income is $p \cdot 1 + 1 \cdot 0 = p$, and consumer 2's is $1$:
+Consumer 1's income is $p_x \cdot 1 + 1 \cdot 0 = p_x$, and consumer 2's is $1$:
 
 $$
-x_1 = \frac{2}{3}\cdot\frac{p}{p} = \frac{2}{3}, \qquad
-y_1 = \frac{1}{3}\, p, \qquad
-x_2 = \frac{1}{3}\cdot\frac{1}{p}, \qquad
+x_1 = \frac{2}{3}\cdot\frac{p_x}{p_x} = \frac{2}{3}, \qquad
+y_1 = \frac{1}{3}\, p_x, \qquad
+x_2 = \frac{1}{3}\cdot\frac{1}{p_x}, \qquad
 y_2 = \frac{2}{3}.
 $$
 
@@ -36,9 +36,9 @@ $$
 by Walras's law):
 
 $$
-x_1 + x_2 = \frac{2}{3} + \frac{1}{3p} = 1
+x_1 + x_2 = \frac{2}{3} + \frac{1}{3p_x} = 1
 \;\;\Longrightarrow\;\;
-p = 1.
+p_x = 1.
 $$
 
 So the equilibrium price ratio is $p_x / p_y = 1$, and the allocation is
@@ -63,7 +63,5 @@ equilibrium is Pareto efficient, as the First Welfare Theorem guarantees.
 
 ## Check your understanding
 
-1. Each consumer ends up consuming more of the good they like more, despite owning
-   none of it (consumer 2) or all of the other (consumer 1). Explain the trade.
-2. Re-solve with endowments $\omega_1 = (1,1)$, $\omega_2 = (0,0)$. What happens,
+1. Re-solve with endowments $\omega_1 = (1,1)$, $\omega_2 = (0,0)$. What happens,
    and what does it tell you about the role of endowments versus preferences?

@@ -23,6 +23,3 @@ $w - \gamma q$ otherwise.
 4. Where exactly does the argument use strict concavity of $u$? Exhibit a
    risk-neutral counterexample to part 2's conclusion of *unique* optimality.
 
-This is among the most frequently asked results in entrance examinations — the goal
-is to be able to reproduce the argument cleanly, not merely to recall the
-conclusion.
