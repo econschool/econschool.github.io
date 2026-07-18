@@ -5,7 +5,7 @@ import rehypeKatex from 'rehype-katex';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://econschool.github.io',
+  site: 'https://econschool.org',
   base: '/',
   markdown: {
     // Math in Markdown: $...$ and $$...$$ render at build time via KaTeX.
