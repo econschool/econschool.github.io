@@ -6,7 +6,7 @@ topics: [research to problem, game theory, banking, multiple equilibria]
 level: Advanced
 source: "Diamond, D. and P. Dybvig (1983), “Bank Runs, Deposit Insurance, and Liquidity,” Journal of Political Economy 91(3)."
 date: 2026-06-05
-draft: false
+draft: true
 ---
 
 *This entry is part of the **research-to-problem** series: a result from a major
