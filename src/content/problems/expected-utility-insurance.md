@@ -5,7 +5,7 @@ type: exercise
 topics: [choice under uncertainty, insurance, expected utility]
 level: Intermediate
 date: 2026-05-12
-draft: false
+draft: true
 ---
 
 ## Exercise

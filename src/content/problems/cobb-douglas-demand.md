@@ -53,8 +53,7 @@ y^d(p_x, p_y, M) = \frac{(1-\alpha)\, M}{p_y}.
 $$
 
 **Interpretation.** The consumer spends the fixed share $\alpha$ of income on $x$
-and $1-\alpha$ on $y$, regardless of prices. Constant expenditure shares are the
-signature of Cobb–Douglas preferences — worth recognising instantly in exams.
+and $1-\alpha$ on $y$, regardless of prices. 
 
 ## Check your understanding
 
