@@ -4,10 +4,13 @@ import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
 import rehypeExternalLinks from 'rehype-external-links';
 
+import sitemap from '@astrojs/sitemap';
+
 // https://astro.build/config
 export default defineConfig({
   site: 'https://learn.econschool.in',
   base: '/',
+
   markdown: {
     // Math in Markdown: $...$ and $$...$$ render at build time via KaTeX.
     // (Caveat: a lone $ in prose starts a math span — write \$ for a literal dollar.)
@@ -17,4 +20,6 @@ export default defineConfig({
       [rehypeExternalLinks, {target: '_blank', rel: ['noopener', 'noreferrer'], test: (node) => !/econschool\.in/.test(node.properties?.href ?? '')}],
     ],
   },
+
+  integrations: [sitemap()],
 });
