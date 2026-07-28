@@ -6,7 +6,7 @@ import rehypeExternalLinks from 'rehype-external-links';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://econschool.org',
+  site: 'https://learn.econschool.in',
   base: '/',
   markdown: {
     // Math in Markdown: $...$ and $$...$$ render at build time via KaTeX.
@@ -14,7 +14,7 @@ export default defineConfig({
     remarkPlugins: [remarkMath],
     rehypePlugins: [
       rehypeKatex,
-      [rehypeExternalLinks, { target: '_blank', rel: ['noopener', 'noreferrer'] }],
+      [rehypeExternalLinks, {target: '_blank', rel: ['noopener', 'noreferrer'], test: (node) => !/econschool\.in/.test(node.properties?.href ?? '')}],
     ],
   },
 });
