@@ -17,7 +17,27 @@ export default defineConfig({
     remarkPlugins: [remarkMath],
     rehypePlugins: [
       rehypeKatex,
-      [rehypeExternalLinks, {target: '_blank', rel: ['noopener', 'noreferrer'], test: (node) => !/econschool\.in/.test(node.properties?.href ?? '')}],
+      [
+        rehypeExternalLinks,
+        {
+          target: '_blank',
+          rel: ['noopener', 'noreferrer'],
+          // Only web links count as "external" — mailto: and tel: stay in-tab.
+          protocols: ['http', 'https'],
+          // This site is learn.econschool.in only. Everything else — the main
+          // .in site, forum.econschool.in, econschool.org — is somewhere else
+          // and opens in a new tab. Hostname-matched, so a lookalike domain
+          // like learn.econschool.in.example.com won't pass as internal.
+          test: (node) => {
+            const href = String(node.properties?.href ?? '');
+            try {
+              return new URL(href).hostname !== 'learn.econschool.in';
+            } catch {
+              return true;
+            }
+          },
+        },
+      ],
     ],
   },
 
